@@ -1,15 +1,16 @@
 package com.mmdev.pizzatime
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Transition
 import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.mmdev.pizzatime.MainActivity.Direction.BACK
+import com.mmdev.pizzatime.MainActivity.Direction.FORWARD
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.cart_with_badge.*
 
 class MainActivity: AppCompatActivity() {
+
+	private enum class Direction { BACK, FORWARD }
 
 	private val pizzaList = arrayListOf(
 			R.drawable.pizza_1_firmennaya,
@@ -22,6 +23,8 @@ class MainActivity: AppCompatActivity() {
 	)
 	private var currentIndex = 0
 
+	private var dragDirection: Direction = FORWARD
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
@@ -29,16 +32,35 @@ class MainActivity: AppCompatActivity() {
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener{
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
 
-			override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {}
+
+			// 2131231040 -> 2131231012
+			// 2131231012 -> 2131231077
+			// 2131231077 -> 2131230881
+			// 2131230881 -> 2131230913
+			override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {
+				if (start == R.id.thirdPos)
+					when (end) {
+						R.id.secondPos -> dragDirection = BACK
+						R.id.fourthPos -> dragDirection = FORWARD
+					}
+				Log.wtf("mylog", dragDirection.name + " $start to $end ")
+			}
 
 			override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
 
 			override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-				if (currentId == R.id.thirdPos && currentIndex < pizzaList.size-4) {
-					forwardChange(motionLayout)
-				}
-				else if (currentId == R.id.thirdPos && currentIndex == pizzaList.size-4){
-					//backwardChange(motionLayout)
+				when (dragDirection) {
+					FORWARD -> {
+						if (currentId == R.id.fourthPos && currentIndex < pizzaList.size-5) {
+							forwardChange(motionLayout)
+						}
+					}
+					BACK -> {
+						if (currentId == R.id.secondPos && currentIndex > 0){
+							backwardChange(motionLayout)
+						}
+
+					}
 				}
 
 			}
@@ -47,27 +69,32 @@ class MainActivity: AppCompatActivity() {
 	}
 
 	private fun forwardChange(motionLayout: MotionLayout){
-		motionLayout.setTransition(R.id.thirdPos, R.id.secondPos)
-		motionLayout.setTransitionDuration(0)
+		motionLayout.setTransition(R.id.fourthToThird).also {
+			motionLayout.setTransitionDuration(0)
+		}
 		motionLayout.transitionToEnd()
+
 		currentIndex++
 		v1.setImageDrawable(v2.drawable)
 		v2.setImageDrawable(v3.drawable)
 		v3.setImageDrawable(v4.drawable)
-		v4.setImageResource(pizzaList[currentIndex+3])
+		v4.setImageDrawable(v5.drawable)
+		v5.setImageResource(pizzaList[currentIndex+4])
 		Log.wtf("mylog", "Going forward $currentIndex")
 	}
 
 	private fun backwardChange(motionLayout: MotionLayout){
-		motionLayout.setTransition(R.id.thirdPos, R.id.secondPos)
-		motionLayout.setTransitionDuration(0)
+		motionLayout.setTransition(R.id.secondToThird).also {
+			motionLayout.setTransitionDuration(0)
+		}
 		motionLayout.transitionToEnd()
+
 		currentIndex--
-		v4.setImageResource(currentIndex)
+		v5.setImageDrawable(v4.drawable)
+		v4.setImageDrawable(v3.drawable)
+		v3.setImageDrawable(v2.drawable)
+		v2.setImageDrawable(v1.drawable)
 		v1.setImageResource(pizzaList[currentIndex])
-		v2.setImageResource(pizzaList[currentIndex-1])
-		v3.setImageResource(pizzaList[currentIndex-2])
-		v4.setImageResource(pizzaList[currentIndex-3])
 		Log.wtf("mylog", "Going backward $currentIndex")
 	}
 }

@@ -135,6 +135,26 @@
 
 		/>
 
+	<ImageView android:id="@+id/v5"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+
+		android:src="@drawable/pizza_5_po_selyanski"
+
+		android:scaleX="0.7"
+		android:scaleY="0.7"
+
+		app:layout_constraintCircle="@id/v1"
+		app:layout_constraintCircleRadius="500dp"
+		app:layout_constraintCircleAngle="120"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
 
 
 
