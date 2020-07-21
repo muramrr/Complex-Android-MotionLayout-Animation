@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+	android:layout_height="wrap_content"
+	android:layout_width="wrap_content"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="?attr/actionButtonStyle"
+	android:clipToPadding="false"
+	android:focusable="true"
+	>
+
+	<ImageView
+		android:id="@+id/ivCart"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center"
+		android:src="@drawable/ic_shopping_cart_24"
+		/>
+
+	<TextView
+		android:id="@+id/tvCardBadgeCount"
+		android:layout_height="20dp"
+		android:layout_width="20dp"
+		android:layout_gravity="end|top"
+		android:layout_marginEnd="-5dp"
+		android:layout_marginTop="3dp"
+		android:background="@drawable/badge_background"
+		android:gravity="center"
+		android:padding="3dp"
+		android:textColor="@android:color/white"
+		android:text="0"
+		android:textSize="10sp"
+		/>
+
+</FrameLayout>

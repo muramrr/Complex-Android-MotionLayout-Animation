@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+	android:id="@+id/motionLayout"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	app:layoutDescription="@xml/carousel_scene"
+
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
+
+
+	<View
+		android:id="@+id/toolbar"
+		android:layout_height="?actionBarSize"
+		android:layout_width="0dp"
+
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		/>
+
+	<!-- toolbar title-->
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/tbTitle"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="Order Manually"
+
+		style="@style/TextAppearance.MaterialComponents.Headline4"
+
+		app:layout_constraintBottom_toBottomOf="@id/toolbar"
+		app:layout_constraintStart_toStartOf="@id/guidelineStart"
+		app:layout_constraintTop_toTopOf="@id/toolbar"
+		/>
+
+	<include android:id="@+id/cartWithBadge"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+
+		layout="@layout/cart_with_badge"
+
+		app:layout_constraintBottom_toBottomOf="@id/toolbar"
+		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+		app:layout_constraintTop_toTopOf="@id/toolbar"
+		/>
+
+	<!-- pizza yellow label -->
+	<com.google.android.material.button.MaterialButton
+		android:id="@+id/tvPizzaChip"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:padding="8dp"
+		android:text="Pizza"
+		android:textColor="@android:color/black"
+		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+
+		app:cornerRadius="24dp"
+		app:backgroundTint="#FFC400"
+
+		app:layout_constraintStart_toStartOf="@id/guidelineStart"
+		app:layout_constraintTop_toBottomOf="@id/toolbar"
+		/>
+
+	<ImageView android:id="@+id/v1"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+
+		android:src="@drawable/pizza_1_firmennaya"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
+	<ImageView android:id="@+id/v2"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+
+		android:src="@drawable/pizza_2_bavarska"
+
+		android:scaleX="0.7"
+		android:scaleY="0.7"
+
+		app:layout_constraintCircle="@id/v1"
+		app:layout_constraintCircleRadius="300dp"
+		app:layout_constraintCircleAngle="120"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
+	<ImageView android:id="@+id/v3"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+
+		android:src="@drawable/pizza_3_margarita"
+
+		android:scaleX="0.7"
+		android:scaleY="0.7"
+
+		app:layout_constraintCircle="@id/v1"
+		app:layout_constraintCircleRadius="500dp"
+		app:layout_constraintCircleAngle="120"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
+	<ImageView android:id="@+id/v4"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+
+		android:src="@drawable/pizza_4_myasna"
+
+		android:scaleX="0.7"
+		android:scaleY="0.7"
+
+		app:layout_constraintCircle="@id/v1"
+		app:layout_constraintCircleRadius="500dp"
+		app:layout_constraintCircleAngle="120"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
+
+
+
+
+
+
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/guidelineStart"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_begin="16dp"
+		/>
+
+	<androidx.constraintlayout.widget.Guideline
+		android:id="@+id/guidelineEnd"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="vertical"
+		app:layout_constraintGuide_end="16dp"
+		/>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
