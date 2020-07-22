@@ -11,17 +11,24 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity: AppCompatActivity() {
 
 	private enum class Direction { BACK, FORWARD }
+	private data class Pizza(var name: String, var image: Int)
 
-	private val pizzaList = arrayListOf(
-			R.drawable.pizza_1_firmennaya,
-			R.drawable.pizza_2_bavarska,
-			R.drawable.pizza_3_margarita,
-			R.drawable.pizza_4_myasna,
-			R.drawable.pizza_5_po_selyanski,
-			R.drawable.pizza_6_salyzmi,
-			R.drawable.pizza_7_vegetarianska
+
+	// size should be >= 5
+	private val pizzaList = listOf(
+			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya),
+			Pizza("Bavarian pizza", R.drawable.pizza_2_bavarska),
+			Pizza("Margherita", R.drawable.pizza_3_margarita),
+			Pizza("Meat pizza", R.drawable.pizza_4_myasna),
+			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski) ,
+			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi) ,
+			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska)
 	)
-	private var currentIndex = 0
+
+	private var currentPizzaInCenter: Pizza = pizzaList[0]
+
+	private var currentIter = 0
+	private var currentItemInCenterIndex = 0
 
 	private var dragDirection: Direction = FORWARD
 
@@ -43,26 +50,35 @@ class MainActivity: AppCompatActivity() {
 						R.id.secondPos -> dragDirection = BACK
 						R.id.fourthPos -> dragDirection = FORWARD
 					}
-				Log.wtf("mylog", dragDirection.name + " $start to $end ")
 			}
 
 			override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
 
 			override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+
 				when (dragDirection) {
 					FORWARD -> {
-						if (currentId == R.id.fourthPos && currentIndex < pizzaList.size-5) {
+//						if (currentItemInCenterIndex < pizzaList.size - 1) currentItemInCenterIndex++
+//						currentPizzaInCenter = pizzaList[currentItemInCenterIndex]
+
+						// (..-5) because 5 images from list are already used
+						// size should be greater or equals than 5
+						if (currentId == R.id.fourthPos && currentIter < pizzaList.size - 5) {
 							forwardChange(motionLayout)
 						}
 					}
 					BACK -> {
-						if (currentId == R.id.secondPos && currentIndex > 0){
+//						if (currentItemInCenterIndex > 0) currentItemInCenterIndex--
+//						currentPizzaInCenter = pizzaList[currentItemInCenterIndex]
+
+
+						if (currentId == R.id.secondPos && currentIter > 0){
 							backwardChange(motionLayout)
 						}
 
 					}
 				}
-
+				tvPizzaName.text = currentPizzaInCenter.name
 			}
 		})
 		//tvCardBadgeCount.visibility = View.GONE
@@ -74,13 +90,15 @@ class MainActivity: AppCompatActivity() {
 		}
 		motionLayout.transitionToEnd()
 
-		currentIndex++
+		currentIter++
 		v1.setImageDrawable(v2.drawable)
 		v2.setImageDrawable(v3.drawable)
 		v3.setImageDrawable(v4.drawable)
 		v4.setImageDrawable(v5.drawable)
-		v5.setImageResource(pizzaList[currentIndex+4])
-		Log.wtf("mylog", "Going forward $currentIndex")
+		// (...+4) because 4 images from list are already used
+		v5.setImageResource(pizzaList[currentIter + 4].image)
+		currentPizzaInCenter = pizzaList[currentIter + 2]
+		Log.wtf("mylog", "Going forward $currentIter")
 	}
 
 	private fun backwardChange(motionLayout: MotionLayout){
@@ -89,12 +107,13 @@ class MainActivity: AppCompatActivity() {
 		}
 		motionLayout.transitionToEnd()
 
-		currentIndex--
+		currentIter--
 		v5.setImageDrawable(v4.drawable)
 		v4.setImageDrawable(v3.drawable)
 		v3.setImageDrawable(v2.drawable)
 		v2.setImageDrawable(v1.drawable)
-		v1.setImageResource(pizzaList[currentIndex])
-		Log.wtf("mylog", "Going backward $currentIndex")
+		v1.setImageResource(pizzaList[currentIter].image)
+		currentPizzaInCenter = pizzaList[currentIter + 2]
+		Log.wtf("mylog", "Going backward $currentIter")
 	}
 }

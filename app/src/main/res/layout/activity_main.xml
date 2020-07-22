@@ -3,6 +3,7 @@
 	android:id="@+id/motionLayout"
 	android:layout_height="match_parent"
 	android:layout_width="match_parent"
+
 	app:layoutDescription="@xml/carousel_scene"
 
 	xmlns:android="http://schemas.android.com/apk/res/android"
@@ -62,10 +63,37 @@
 		app:layout_constraintTop_toBottomOf="@id/toolbar"
 		/>
 
+	<View android:id="@+id/tableBackground"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="100dp"
+
+
+		android:background="@drawable/table_background"
+
+		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		/>
+
+	<View android:id="@+id/pizzaViewsBounds"
+		android:layout_width="250dp"
+		android:layout_height="250dp"
+		android:layout_marginTop="24dp"
+		android:background="@null"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		/>
+
 	<ImageView android:id="@+id/v1"
 		android:layout_width="250dp"
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
+		android:contentDescription="@null"
 
 		android:src="@drawable/pizza_1_firmennaya"
 
@@ -79,6 +107,7 @@
 		android:layout_width="250dp"
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
+		android:contentDescription="@null"
 
 		android:src="@drawable/pizza_2_bavarska"
 
@@ -99,6 +128,7 @@
 		android:layout_width="250dp"
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
+		android:contentDescription="@null"
 
 		android:src="@drawable/pizza_3_margarita"
 
@@ -119,6 +149,7 @@
 		android:layout_width="250dp"
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
+		android:contentDescription="@null"
 
 		android:src="@drawable/pizza_4_myasna"
 
@@ -139,6 +170,7 @@
 		android:layout_width="250dp"
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
+		android:contentDescription="@null"
 
 		android:src="@drawable/pizza_5_po_selyanski"
 
@@ -155,7 +187,19 @@
 
 		/>
 
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/tvPizzaName"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
 
+		android:text="Firmennaya"
+		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+
+		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		/>
 
 
 
