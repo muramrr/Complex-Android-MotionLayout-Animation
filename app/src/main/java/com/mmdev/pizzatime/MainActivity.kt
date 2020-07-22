@@ -25,10 +25,10 @@ class MainActivity: AppCompatActivity() {
 			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska)
 	)
 
-	private var currentPizzaInCenter: Pizza = pizzaList[0]
+	private var currentPizzaInFocus: Pizza = pizzaList[0]
 
 	private var currentIter = 0
-	private var currentItemInCenterIndex = 0
+
 
 	private var dragDirection: Direction = FORWARD
 
@@ -36,7 +36,14 @@ class MainActivity: AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener{
+		//init name for pizzas
+		name1.text = pizzaList[0].name
+		name2.text = pizzaList[1].name
+		name3.text = pizzaList[2].name
+		name4.text = pizzaList[3].name
+		name5.text = pizzaList[4].name
+
+		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
 
 
@@ -45,16 +52,42 @@ class MainActivity: AppCompatActivity() {
 			// 2131231077 -> 2131230881
 			// 2131230881 -> 2131230913
 			override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {
-				if (start == R.id.thirdPos)
-					when (end) {
+
+				//Log.wtf("mylogs", "$start $end")
+
+
+				when (start) {
+					R.id.thirdPos -> when (end) {
 						R.id.secondPos -> dragDirection = BACK
 						R.id.fourthPos -> dragDirection = FORWARD
 					}
+				}
+
 			}
 
 			override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
 
 			override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+
+				val findPizzaInFocus = {
+					when (currentId) {
+						R.id.firstPos -> currentPizzaInFocus =
+							pizzaList.find { it.name == name1.text }!!
+
+						R.id.secondPos -> currentPizzaInFocus =
+							pizzaList.find { it.name == name2.text }!!
+
+						R.id.thirdPos -> currentPizzaInFocus =
+							pizzaList.find { it.name == name3.text }!!
+
+						R.id.fourthPos -> currentPizzaInFocus =
+							pizzaList.find { it.name == name4.text }!!
+
+						R.id.lastPos -> currentPizzaInFocus =
+							pizzaList.find { it.name == name5.text }!!
+
+					}
+				}
 
 				when (dragDirection) {
 					FORWARD -> {
@@ -66,19 +99,23 @@ class MainActivity: AppCompatActivity() {
 						if (currentId == R.id.fourthPos && currentIter < pizzaList.size - 5) {
 							forwardChange(motionLayout)
 						}
+						else findPizzaInFocus.invoke()
+
 					}
 					BACK -> {
 //						if (currentItemInCenterIndex > 0) currentItemInCenterIndex--
 //						currentPizzaInCenter = pizzaList[currentItemInCenterIndex]
 
-
-						if (currentId == R.id.secondPos && currentIter > 0){
+						if (currentId == R.id.secondPos && currentIter > 0) {
 							backwardChange(motionLayout)
 						}
+						else findPizzaInFocus.invoke()
 
 					}
+
 				}
-				tvPizzaName.text = currentPizzaInCenter.name
+
+				Log.wtf("mylog", "current pizza in focus = ${currentPizzaInFocus.name}")
 			}
 		})
 		//tvCardBadgeCount.visibility = View.GONE
@@ -91,29 +128,47 @@ class MainActivity: AppCompatActivity() {
 		motionLayout.transitionToEnd()
 
 		currentIter++
-		v1.setImageDrawable(v2.drawable)
-		v2.setImageDrawable(v3.drawable)
-		v3.setImageDrawable(v4.drawable)
-		v4.setImageDrawable(v5.drawable)
+		pizza1.setImageDrawable(pizza2.drawable)
+		name1.text = name2.text
+		pizza2.setImageDrawable(pizza3.drawable)
+		name2.text = name3.text
+		pizza3.setImageDrawable(pizza4.drawable)
+		name3.text = name4.text
+		pizza4.setImageDrawable(pizza5.drawable)
+		name4.text = name5.text
 		// (...+4) because 4 images from list are already used
-		v5.setImageResource(pizzaList[currentIter + 4].image)
-		currentPizzaInCenter = pizzaList[currentIter + 2]
-		Log.wtf("mylog", "Going forward $currentIter")
+		pizza5.setImageResource(pizzaList[currentIter + 4].image)
+		name5.text = pizzaList[currentIter + 4].name
+
+
+		//third pos in focus
+		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
+
+		//Log.wtf("mylog", "Going forward $currentIter")
 	}
 
-	private fun backwardChange(motionLayout: MotionLayout){
+	private fun backwardChange(motionLayout: MotionLayout) {
 		motionLayout.setTransition(R.id.secondToThird).also {
 			motionLayout.setTransitionDuration(0)
 		}
 		motionLayout.transitionToEnd()
 
 		currentIter--
-		v5.setImageDrawable(v4.drawable)
-		v4.setImageDrawable(v3.drawable)
-		v3.setImageDrawable(v2.drawable)
-		v2.setImageDrawable(v1.drawable)
-		v1.setImageResource(pizzaList[currentIter].image)
-		currentPizzaInCenter = pizzaList[currentIter + 2]
-		Log.wtf("mylog", "Going backward $currentIter")
+		pizza5.setImageDrawable(pizza4.drawable)
+		name5.text = name4.text
+		pizza4.setImageDrawable(pizza3.drawable)
+		name4.text = name3.text
+		pizza3.setImageDrawable(pizza2.drawable)
+		name3.text = name2.text
+		pizza2.setImageDrawable(pizza1.drawable)
+		name2.text = name1.text
+		pizza1.setImageResource(pizzaList[currentIter].image)
+		name1.text = pizzaList[currentIter].name
+
+
+		//third pos in focus
+		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
+
+		//Log.wtf("mylog", "Going backward $currentIter")
 	}
 }
