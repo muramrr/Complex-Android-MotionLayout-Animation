@@ -66,13 +66,12 @@
 	<View android:id="@+id/tableBackground"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
-		android:layout_marginBottom="50dp"
-
+		android:layout_marginBottom="24dp"
 
 		android:background="@drawable/table_background"
 
 		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintBottom_toBottomOf="@id/addToCartButton"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
@@ -92,8 +91,7 @@
 	<include layout="@layout/pizza_views"/>
 
 	<!-- pizza name -->
-	<TextSwitcher
-		android:id="@+id/pizzaName"
+	<TextSwitcher android:id="@+id/pizzaName"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
@@ -131,16 +129,15 @@
 
 		android:text=""
 		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-		android:textSize="30sp"
+		android:textSize="36sp"
+		android:textStyle="bold"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaName"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
 
-
-	<LinearLayout
-		android:id="@+id/sizeContainer"
+	<LinearLayout android:id="@+id/sizeContainer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
@@ -154,12 +151,14 @@
 			android:id="@+id/btnSize_S"
 			android:layout_width="56dp"
 			android:layout_height="56dp"
-			app:backgroundTint="@color/btn_size_selected"
+			android:padding="1dp"
 
 			android:text="S"
 			android:textColor="@android:color/black"
 
-			style="@style/My.Widget.Button.IconOnly.Rounded"
+			app:backgroundTint="@color/btn_size_selected"
+
+			style="@style/My.Widget.Button.LetterOnly.Rounded"
 			/>
 
 		<com.google.android.material.button.MaterialButton
@@ -167,12 +166,14 @@
 			android:layout_width="56dp"
 			android:layout_height="56dp"
 			android:layout_marginStart="8dp"
-			app:backgroundTint="@color/btn_size_selected"
+			android:padding="1dp"
 
 			android:text="M"
 			android:textColor="@android:color/black"
 
-			style="@style/My.Widget.Button.IconOnly.Rounded"
+			app:backgroundTint="@color/btn_size_selected"
+
+			style="@style/My.Widget.Button.LetterOnly.Rounded"
 			/>
 
 		<com.google.android.material.button.MaterialButton
@@ -180,15 +181,35 @@
 			android:layout_width="56dp"
 			android:layout_height="56dp"
 			android:layout_marginStart="8dp"
-			app:backgroundTint="@color/btn_size_selected"
+			android:padding="1dp"
 
 			android:text="L"
 			android:textColor="@android:color/black"
 
-			style="@style/My.Widget.Button.IconOnly.Rounded"
+			app:backgroundTint="@color/btn_size_selected"
+
+			style="@style/My.Widget.Button.LetterOnly.Rounded"
 			/>
 
 	</LinearLayout>
+
+
+	<ImageButton
+		android:id="@+id/addToCartButton"
+		android:layout_width="64dp"
+		android:layout_height="64dp"
+		android:layout_marginBottom="50dp"
+
+		android:src="@drawable/ic_add_to_shopping_cart_24_white"
+
+		android:background="@drawable/btn_add_to_cart_background"
+
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+
+		android:contentDescription="@null"
+		/>
 
 
 

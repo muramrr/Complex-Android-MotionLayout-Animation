@@ -7,9 +7,20 @@
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
-	<style name="My.Widget.Button.IconOnly.Rounded" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
+	<style name="My.Widget.Button.LetterOnly.Rounded" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
 
 		<item name="android:padding">1dp</item>
+		<item name="android:insetLeft">0dp</item>
+		<item name="android:insetRight">0dp</item>
+		<item name="android:insetTop">0dp</item>
+		<item name="android:insetBottom">0dp</item>
+
+		<item name="shapeAppearanceOverlay">@style/My.ShapeAppearanceOverlay.Button.Rounded</item>
+
+	</style>
+
+	<style name="My.Widget.Button.IconOnly.Rounded" parent="Widget.MaterialComponents.Button.UnelevatedButton.Icon">
+
 		<item name="android:insetLeft">0dp</item>
 		<item name="android:insetRight">0dp</item>
 		<item name="android:insetTop">0dp</item>
