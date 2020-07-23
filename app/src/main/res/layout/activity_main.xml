@@ -27,8 +27,9 @@
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:text="Order Manually"
+		android:textSize="@dimen/tv_order_manually_text_size"
 
-		style="@style/TextAppearance.MaterialComponents.Headline4"
+		style="@style/TextAppearance.MaterialComponents.Headline5"
 
 		app:layout_constraintBottom_toBottomOf="@id/toolbar"
 		app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -51,10 +52,10 @@
 		android:id="@+id/tvPizzaChip"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
-		android:padding="8dp"
+		android:clickable="false"
 		android:text="Pizza"
 		android:textColor="@android:color/black"
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+		android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
 
 		app:cornerRadius="24dp"
 		app:backgroundTint="#FFC400"
@@ -77,9 +78,8 @@
 		/>
 
 	<View android:id="@+id/pizzaViewsBounds"
-		android:layout_width="255dp"
-		android:layout_height="255dp"
-		android:layout_marginTop="24dp"
+		android:layout_width="@dimen/pizzaPlateSize"
+		android:layout_height="@dimen/pizzaPlateSize"
 		android:background="@drawable/pizza_plate"
 
 		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
@@ -92,9 +92,10 @@
 
 	<!-- pizza name -->
 	<TextSwitcher android:id="@+id/pizzaName"
-		android:layout_width="wrap_content"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
+		android:layout_marginTop="24dp"
+
 		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
@@ -104,6 +105,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 
+			android:maxLines="1"
+			android:ellipsize="end"
+
 			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 			android:textAlignment="center"
@@ -112,6 +116,9 @@
 		<com.google.android.material.textview.MaterialTextView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+
+			android:maxLines="1"
+			android:ellipsize="end"
 
 			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
@@ -125,11 +132,14 @@
 		android:id="@+id/pizzaPrice"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
+		android:layout_marginTop="8dp"
+
+		android:maxLines="1"
+		android:ellipsize="end"
 
 		android:text=""
 		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-		android:textSize="36sp"
+		android:textSize="@dimen/pizzaPriceTextSize"
 		android:textStyle="bold"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaName"
@@ -137,10 +147,10 @@
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
 
-	<LinearLayout android:id="@+id/sizeContainer"
+	<LinearLayout android:id="@+id/pizzaSizeContainer"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
+		android:layout_marginTop="8dp"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaPrice"
 		app:layout_constraintStart_toStartOf="@id/tableBackground"
@@ -149,8 +159,8 @@
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btnSize_S"
-			android:layout_width="56dp"
-			android:layout_height="56dp"
+			android:layout_width="@dimen/btn_pizza_size"
+			android:layout_height="@dimen/btn_pizza_size"
 			android:padding="1dp"
 
 			android:text="S"
@@ -163,8 +173,8 @@
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btnSize_M"
-			android:layout_width="56dp"
-			android:layout_height="56dp"
+			android:layout_width="@dimen/btn_pizza_size"
+			android:layout_height="@dimen/btn_pizza_size"
 			android:layout_marginStart="8dp"
 			android:padding="1dp"
 
@@ -178,8 +188,8 @@
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/btnSize_L"
-			android:layout_width="56dp"
-			android:layout_height="56dp"
+			android:layout_width="@dimen/btn_pizza_size"
+			android:layout_height="@dimen/btn_pizza_size"
 			android:layout_marginStart="8dp"
 			android:padding="1dp"
 
@@ -193,17 +203,16 @@
 
 	</LinearLayout>
 
-
-	<ImageButton
-		android:id="@+id/addToCartButton"
-		android:layout_width="64dp"
-		android:layout_height="64dp"
-		android:layout_marginBottom="50dp"
+	<ImageButton android:id="@+id/addToCartButton"
+		android:layout_width="@dimen/btn_add_to_cart_size"
+		android:layout_height="@dimen/btn_add_to_cart_size"
 
 		android:src="@drawable/ic_add_to_shopping_cart_24_white"
 
 		android:background="@drawable/btn_add_to_cart_background"
 
+		app:layout_constraintVertical_bias="0.95"
+		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintBottom_toBottomOf="parent"

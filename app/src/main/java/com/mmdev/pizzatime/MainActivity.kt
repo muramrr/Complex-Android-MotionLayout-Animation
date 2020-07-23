@@ -14,19 +14,24 @@ import kotlinx.android.synthetic.main.pizza_views.*
 class MainActivity: AppCompatActivity() {
 
 	private enum class Direction { BACK, FORWARD }
-	private data class Pizza(val name: String, val image: Int, val price: Int)
 	private enum class PizzaSize { S, M, L }
+
+	private data class Pizza(val name: String,
+	                         val image: Int,
+	                         val price: Int,
+	                         var size: PizzaSize = M)
+
 
 
 	// size should be >= 5
 	private val pizzaList = listOf(
 			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya, 14),
-			Pizza("Bavarian pizza", R.drawable.pizza_2_bavarska, 16),
-			Pizza("Margherita pizza", R.drawable.pizza_3_margarita, 22),
+			Pizza("Bavarian", R.drawable.pizza_2_bavarska, 16),
+			Pizza("Margherita", R.drawable.pizza_3_margarita, 22),
 			Pizza("Meat pizza", R.drawable.pizza_4_myasna, 20),
 			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski, 25),
 			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi, 20),
-			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska, 19)
+			Pizza("Vegetarian", R.drawable.pizza_7_vegetarianska, 19)
 	)
 
 	private var pizza1 = pizzaList[0]
@@ -52,19 +57,22 @@ class MainActivity: AppCompatActivity() {
 		val priceChangeAnimation =
 			AnimationUtils.loadAnimation(this, R.anim.textview_change_text_anim)
 
+		// pizza name appearance anim
 		val inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
 			duration = 300
 		}
+		// pizza name disappearing anim
 		val outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out).apply {
 			duration = 300
 		}
 
+		//apply anim to textSwitcher
 		pizzaName.apply {
 			inAnimation = inAnim
 			outAnimation = outAnim
 		}
 
-		//select size by default
+		//select size by default M
 		setSelectedSizeM()
 
 		//init imgs for pizza
@@ -77,7 +85,7 @@ class MainActivity: AppCompatActivity() {
 
 		//init first prices and names
 		pizzaName.setCurrentText(currentPizzaInFocus.name)
-		pizzaPrice.text = "${currentPizzaInFocus.price} $"
+		pizzaPrice.text = "$ ${currentPizzaInFocus.price}"
 
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}

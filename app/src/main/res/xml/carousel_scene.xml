@@ -84,20 +84,18 @@
 	<ConstraintSet android:id="@+id/firstPos">
 
 		<Constraint android:id="@+id/pizzaImg_1"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_2"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			android:rotation="50"
 
@@ -105,13 +103,8 @@
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_1"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 	</ConstraintSet>
@@ -120,9 +113,8 @@
 	<ConstraintSet android:id="@+id/secondPos">
 
 		<Constraint android:id="@+id/pizzaImg_1"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			android:rotation="50"
 
@@ -130,74 +122,50 @@
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_2"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="240"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_2"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_3"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			android:rotation="50"
+			android:rotation="-50"
 
 			android:scaleX="0.7"
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_2"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_4"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_2"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_5"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_2"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 	</ConstraintSet>
@@ -206,24 +174,17 @@
 	<ConstraintSet android:id="@+id/thirdPos">
 
 		<Constraint android:id="@+id/pizzaImg_1"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_3"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_2"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			android:rotation="50"
 
@@ -231,55 +192,41 @@
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_3"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="240"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_3"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_4"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			android:rotation="50"
+			android:rotation="-50"
 
 			android:scaleX="0.7"
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_3"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_5"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_3"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="120"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 	</ConstraintSet>
@@ -288,38 +235,28 @@
 	<ConstraintSet android:id="@+id/fourthPos">
 
 		<Constraint android:id="@+id/pizzaImg_1"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_4"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_2"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_4"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_3"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			android:rotation="50"
 
@@ -327,41 +264,34 @@
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_4"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="240"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_4"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_5"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			android:rotation="50"
+			android:rotation="-50"
 
 			android:scaleX="0.7"
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_4"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="120"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 	</ConstraintSet>
@@ -370,52 +300,38 @@
 	<ConstraintSet android:id="@+id/lastPos">
 
 		<Constraint android:id="@+id/pizzaImg_1"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_5"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
-
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_2"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_5"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_3"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			app:layout_constraintCircle="@id/pizzaImg_5"
-			app:layout_constraintCircleRadius="500dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusOutView"
 			app:layout_constraintCircleAngle="240"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_4"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
 			android:rotation="50"
 
@@ -423,22 +339,19 @@
 			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizzaImg_5"
-			app:layout_constraintCircleRadius="300dp"
+			app:layout_constraintCircleRadius="@dimen/pizzaRadiusInView"
 			app:layout_constraintCircleAngle="240"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
 			/>
 
 		<Constraint android:id="@+id/pizzaImg_5"
-			android:layout_width="250dp"
-			android:layout_height="250dp"
-			android:layout_marginTop="24dp"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
 
-			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
 	</ConstraintSet>

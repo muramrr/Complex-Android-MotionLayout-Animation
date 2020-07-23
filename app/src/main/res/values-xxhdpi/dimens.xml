@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<dimen name="pizzaImgSize">250dp</dimen>
+	<dimen name="pizzaPlateSize">255dp</dimen>
+	<dimen name="pizzaPriceTextSize">36sp</dimen>
+
+	<dimen name="btn_add_to_cart_size">64dp</dimen>
+	<dimen name="btn_pizza_size">56dp</dimen>
+
+	<dimen name="tv_order_manually_text_size">36sp</dimen>
+	<dimen name="pizzaRadiusInView">300dp</dimen>
+	<dimen name="pizzaRadiusOutView">500dp</dimen>
+</resources>
