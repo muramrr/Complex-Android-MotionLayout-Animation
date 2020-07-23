@@ -10,6 +10,7 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	>
 
+	<!-- app:layoutDescription="@xml/carousel_scene" -->
 
 	<View android:id="@+id/toolbar"
 		android:layout_height="?actionBarSize"
@@ -88,162 +89,40 @@
 
 		/>
 
-	<ImageView android:id="@+id/pizza1"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		android:layout_marginTop="24dp"
-		android:contentDescription="@null"
+	<include layout="@layout/pizza_views"/>
 
-		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-
-		/>
-
-	<ImageView android:id="@+id/pizza2"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		android:layout_marginTop="24dp"
-		android:contentDescription="@null"
-
-		app:layout_constraintCircle="@id/pizza1"
-		app:layout_constraintCircleRadius="300dp"
-		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-
-		/>
-
-	<ImageView android:id="@+id/pizza3"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		android:layout_marginTop="24dp"
-		android:contentDescription="@null"
-
-		app:layout_constraintCircle="@id/pizza1"
-		app:layout_constraintCircleRadius="500dp"
-		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-
-		/>
-
-	<ImageView android:id="@+id/pizza4"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		android:layout_marginTop="24dp"
-		android:contentDescription="@null"
-
-		app:layout_constraintCircle="@id/pizza1"
-		app:layout_constraintCircleRadius="500dp"
-		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-
-		/>
-
-	<ImageView android:id="@+id/pizza5"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
-		android:layout_marginTop="24dp"
-		android:contentDescription="@null"
-
-		app:layout_constraintCircle="@id/pizza1"
-		app:layout_constraintCircleRadius="500dp"
-		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-
-		/>
-
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/name1"
+	<!-- pizza name -->
+	<TextSwitcher
+		android:id="@+id/pizzaName"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="16dp"
-
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-
-		android:alpha="0"
-
 		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
+		>
 
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/name2"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
+		<com.google.android.material.textview.MaterialTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+			android:text=""
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+			android:textAlignment="center"
+			/>
 
-		android:alpha="0"
+		<com.google.android.material.textview.MaterialTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
 
-		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
+			android:text=""
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+			android:textAlignment="center"
+			/>
 
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/name3"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
+	</TextSwitcher>
 
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-
-		android:alpha="0"
-
-		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
-
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/name4"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
-
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-
-		android:alpha="0"
-
-		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
-
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/name5"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="16dp"
-
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-
-		android:alpha="0"
-
-		app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
-
+	<!-- pizza price -->
 	<com.google.android.material.textview.MaterialTextView
 		android:id="@+id/pizzaPrice"
 		android:layout_width="wrap_content"
@@ -254,11 +133,62 @@
 		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 		android:textSize="30sp"
 
-		app:layout_constraintTop_toBottomOf="@id/name1"
+		app:layout_constraintTop_toBottomOf="@id/pizzaName"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
 
+
+	<LinearLayout
+		android:id="@+id/sizeContainer"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+
+		app:layout_constraintTop_toBottomOf="@id/pizzaPrice"
+		app:layout_constraintStart_toStartOf="@id/tableBackground"
+		app:layout_constraintEnd_toEndOf="@id/tableBackground"
+		>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnSize_S"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			app:backgroundTint="@color/btn_size_selected"
+
+			android:text="S"
+			android:textColor="@android:color/black"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnSize_M"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			android:layout_marginStart="8dp"
+			app:backgroundTint="@color/btn_size_selected"
+
+			android:text="M"
+			android:textColor="@android:color/black"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnSize_L"
+			android:layout_width="56dp"
+			android:layout_height="56dp"
+			android:layout_marginStart="8dp"
+			app:backgroundTint="@color/btn_size_selected"
+
+			android:text="L"
+			android:textColor="@android:color/black"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+	</LinearLayout>
 
 
 

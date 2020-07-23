@@ -6,39 +6,41 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.mmdev.pizzatime.MainActivity.Direction.BACK
 import com.mmdev.pizzatime.MainActivity.Direction.FORWARD
+import com.mmdev.pizzatime.MainActivity.PizzaSize.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.pizza_views.*
+
 
 class MainActivity: AppCompatActivity() {
 
 	private enum class Direction { BACK, FORWARD }
 	private data class Pizza(val name: String, val image: Int, val price: Int)
+	private enum class PizzaSize { S, M, L }
 
-
-	// size should be >= 5
-//	private val pizzaList = listOf(
-//			Pizza("Chef's pizza", R.color.colorAccent),
-//			Pizza("Bavarian pizza", R.color.colorPrimary),
-//			Pizza("Margherita", R.color.colorPrimaryDark),
-//			Pizza("Meat pizza", R.color.colorAccent),
-//			Pizza("Village pizza", R.color.colorPrimary) ,
-//			Pizza("Salami pizza", R.color.colorPrimaryDark) ,
-//			Pizza("Vegetarian pizza", R.color.colorAccent)
-//	)
 
 	// size should be >= 5
 	private val pizzaList = listOf(
 			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya, 14),
 			Pizza("Bavarian pizza", R.drawable.pizza_2_bavarska, 16),
-			Pizza("Margherita", R.drawable.pizza_3_margarita, 22),
+			Pizza("Margherita pizza", R.drawable.pizza_3_margarita, 22),
 			Pizza("Meat pizza", R.drawable.pizza_4_myasna, 20),
 			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski, 25),
 			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi, 20),
 			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska, 19)
 	)
 
+	private var pizza1 = pizzaList[0]
+	private var pizza2 = pizzaList[1]
+	private var pizza3 = pizzaList[2]
+	private var pizza4 = pizzaList[3]
+	private var pizza5 = pizzaList[4]
+
 	private var currentPizzaInFocus: Pizza = pizzaList[0]
 
 	private var currentIter = 0
+
+
+	private var sizeSelected : PizzaSize = M
 
 
 	private var dragDirection: Direction = FORWARD
@@ -47,20 +49,34 @@ class MainActivity: AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		val a = AnimationUtils.loadAnimation(this, R.anim.textview_change_text_anim)
+		val priceChangeAnimation =
+			AnimationUtils.loadAnimation(this, R.anim.textview_change_text_anim)
 
-		//init name for pizzas
-		name1.text = pizzaList[0].name
-		pizza1.setImageResource(pizzaList[0].image)
-		name2.text = pizzaList[1].name
-		pizza2.setImageResource(pizzaList[1].image)
-		name3.text = pizzaList[2].name
-		pizza3.setImageResource(pizzaList[2].image)
-		name4.text = pizzaList[3].name
-		pizza4.setImageResource(pizzaList[3].image)
-		name5.text = pizzaList[4].name
-		pizza5.setImageResource(pizzaList[4].image)
+		val inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
+			duration = 300
+		}
+		val outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out).apply {
+			duration = 300
+		}
 
+		pizzaName.apply {
+			inAnimation = inAnim
+			outAnimation = outAnim
+		}
+
+		//select size by default
+		setSelectedSizeM()
+
+		//init imgs for pizza
+		pizzaImg_1.setImageResource(pizzaList[0].image)
+		pizzaImg_2.setImageResource(pizzaList[1].image)
+		pizzaImg_3.setImageResource(pizzaList[2].image)
+		pizzaImg_4.setImageResource(pizzaList[3].image)
+		pizzaImg_5.setImageResource(pizzaList[4].image)
+
+
+		//init first prices and names
+		pizzaName.setCurrentText(currentPizzaInFocus.name)
 		pizzaPrice.text = "${currentPizzaInFocus.price} $"
 
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
@@ -89,21 +105,11 @@ class MainActivity: AppCompatActivity() {
 
 				val findPizzaInFocus = {
 					when (currentId) {
-						R.id.firstPos -> currentPizzaInFocus =
-							pizzaList.find { it.name == name1.text }!!
-
-						R.id.secondPos -> currentPizzaInFocus =
-							pizzaList.find { it.name == name2.text }!!
-
-						R.id.thirdPos -> currentPizzaInFocus =
-							pizzaList.find { it.name == name3.text }!!
-
-						R.id.fourthPos -> currentPizzaInFocus =
-							pizzaList.find { it.name == name4.text }!!
-
-						R.id.lastPos -> currentPizzaInFocus =
-							pizzaList.find { it.name == name5.text }!!
-
+						R.id.firstPos -> currentPizzaInFocus = pizza1
+						R.id.secondPos -> currentPizzaInFocus = pizza2
+						R.id.thirdPos -> currentPizzaInFocus = pizza3
+						R.id.fourthPos -> currentPizzaInFocus = pizza4
+						R.id.lastPos -> currentPizzaInFocus = pizza5
 					}
 				}
 
@@ -129,11 +135,18 @@ class MainActivity: AppCompatActivity() {
 
 				}
 
-				pizzaPrice.startAnimation(a)
-				pizzaPrice.text = "${currentPizzaInFocus.price} $"
+				pizzaName.setText(currentPizzaInFocus.name)
+
+				pizzaPrice.startAnimation(priceChangeAnimation)
+				pizzaPrice.text = "$ ${currentPizzaInFocus.price}"
 
 			}
 		})
+
+
+		btnSize_S.setOnClickListener { setSelectedSizeS() }
+		btnSize_M.setOnClickListener { setSelectedSizeM() }
+		btnSize_L.setOnClickListener { setSelectedSizeL() }
 	}
 
 	/**
@@ -148,21 +161,21 @@ class MainActivity: AppCompatActivity() {
 		motionLayout.transitionToEnd()
 
 		currentIter++
-		pizza1.setImageDrawable(pizza2.drawable)
-		name1.text = name2.text
-		pizza2.setImageDrawable(pizza3.drawable)
-		name2.text = name3.text
-		pizza3.setImageDrawable(pizza4.drawable)
-		name3.text = name4.text
-		pizza4.setImageDrawable(pizza5.drawable)
-		name4.text = name5.text
+		pizzaImg_1.setImageDrawable(pizzaImg_2.drawable)
+		pizza1 = pizza2
+		pizzaImg_2.setImageDrawable(pizzaImg_3.drawable)
+		pizza2 = pizza3
+		pizzaImg_3.setImageDrawable(pizzaImg_4.drawable)
+		pizza3 = pizza4
+		pizzaImg_4.setImageDrawable(pizzaImg_5.drawable)
+		pizza4 = pizza5
 		// (...+4) because 4 images from list are already used
-		pizza5.setImageResource(pizzaList[currentIter + 4].image)
-		name5.text = pizzaList[currentIter + 4].name
+		pizza5 = pizzaList[currentIter + 4]
+		pizzaImg_5.setImageResource(pizzaList[currentIter + 4].image)
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
+		currentPizzaInFocus = pizza3
 	}
 
 	/**
@@ -177,19 +190,41 @@ class MainActivity: AppCompatActivity() {
 		motionLayout.transitionToEnd()
 
 		currentIter--
-		pizza5.setImageDrawable(pizza4.drawable)
-		name5.text = name4.text
-		pizza4.setImageDrawable(pizza3.drawable)
-		name4.text = name3.text
-		pizza3.setImageDrawable(pizza2.drawable)
-		name3.text = name2.text
-		pizza2.setImageDrawable(pizza1.drawable)
-		name2.text = name1.text
-		pizza1.setImageResource(pizzaList[currentIter].image)
-		name1.text = pizzaList[currentIter].name
+		pizzaImg_5.setImageDrawable(pizzaImg_4.drawable)
+		pizza5 = pizza4
+		pizzaImg_4.setImageDrawable(pizzaImg_3.drawable)
+		pizza4 = pizza3
+		pizzaImg_3.setImageDrawable(pizzaImg_2.drawable)
+		pizza3 = pizza2
+		pizzaImg_2.setImageDrawable(pizzaImg_1.drawable)
+		pizza2 = pizza1
+		pizzaImg_1.setImageResource(pizzaList[currentIter].image)
+		pizza1 = pizzaList[currentIter]
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
+		currentPizzaInFocus = pizza3
+	}
+
+
+	private fun setSelectedSizeS(){
+		btnSize_S.isSelected = true
+		sizeSelected = S
+		btnSize_M.isSelected = false
+		btnSize_L.isSelected = false
+	}
+
+	private fun setSelectedSizeM(){
+		btnSize_S.isSelected = false
+		btnSize_M.isSelected = true
+		sizeSelected = M
+		btnSize_L.isSelected = false
+	}
+
+	private fun setSelectedSizeL(){
+		btnSize_S.isSelected = false
+		btnSize_M.isSelected = false
+		btnSize_L.isSelected = true
+		sizeSelected = L
 	}
 }
