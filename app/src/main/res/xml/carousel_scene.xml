@@ -94,8 +94,7 @@
 
 			/>
 
-		<Constraint
-			android:id="@+id/name1"
+		<Constraint android:id="@+id/name1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="16dp"
@@ -127,18 +126,6 @@
 
 			/>
 
-		<Constraint android:id="@+id/name2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-			/>
-
 	</ConstraintSet>
 
 	<!-- first on the left second in center and third right -->
@@ -164,18 +151,6 @@
 
 			/>
 
-		<Constraint android:id="@+id/name1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-			/>
-
 		<Constraint android:id="@+id/pizza2"
 			android:layout_width="250dp"
 			android:layout_height="250dp"
@@ -219,25 +194,10 @@
 
 			/>
 
-		<Constraint android:id="@+id/name3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-			/>
-
 		<Constraint android:id="@+id/pizza4"
 			android:layout_width="250dp"
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
-
-			android:scaleX="0.7"
-			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizza2"
 			app:layout_constraintCircleRadius="500dp"
@@ -253,9 +213,6 @@
 			android:layout_width="250dp"
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
-
-			android:scaleX="0.7"
-			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizza2"
 			app:layout_constraintCircleRadius="500dp"
@@ -277,9 +234,6 @@
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
 
-			android:scaleX="0.7"
-			android:scaleY="0.7"
-
 			app:layout_constraintCircle="@id/pizza3"
 			app:layout_constraintCircleRadius="500dp"
 			app:layout_constraintCircleAngle="240"
@@ -289,8 +243,6 @@
 			app:layout_constraintStart_toStartOf="parent"
 
 			/>
-
-
 
 		<Constraint android:id="@+id/pizza2"
 			android:layout_width="250dp"
@@ -309,18 +261,6 @@
 			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			/>
-
-		<Constraint android:id="@+id/name2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizza3"
@@ -362,18 +302,6 @@
 			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			/>
-
-		<Constraint android:id="@+id/name4"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizza5"
@@ -400,9 +328,6 @@
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
 
-			android:scaleX="0.7"
-			android:scaleY="0.7"
-
 			app:layout_constraintCircle="@id/pizza4"
 			app:layout_constraintCircleRadius="500dp"
 			app:layout_constraintCircleAngle="240"
@@ -417,9 +342,6 @@
 			android:layout_width="250dp"
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
-
-			android:scaleX="0.7"
-			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizza4"
 			app:layout_constraintCircleRadius="500dp"
@@ -447,18 +369,6 @@
 			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			/>
-
-		<Constraint android:id="@+id/name3"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizza4"
@@ -502,19 +412,6 @@
 			app:layout_constraintStart_toStartOf="parent"
 			/>
 
-		<Constraint android:id="@+id/name5z"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-			/>
-
-
 	</ConstraintSet>
 
 	<!-- 4th and 5th visible -->
@@ -524,9 +421,6 @@
 			android:layout_width="250dp"
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
-
-			android:scaleX="0.7"
-			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizza5"
 			app:layout_constraintCircleRadius="500dp"
@@ -543,9 +437,6 @@
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
 
-			android:scaleX="0.7"
-			android:scaleY="0.7"
-
 			app:layout_constraintCircle="@id/pizza5"
 			app:layout_constraintCircleRadius="500dp"
 			app:layout_constraintCircleAngle="240"
@@ -559,9 +450,6 @@
 			android:layout_width="250dp"
 			android:layout_height="250dp"
 			android:layout_marginTop="24dp"
-
-			android:scaleX="0.7"
-			android:scaleY="0.7"
 
 			app:layout_constraintCircle="@id/pizza5"
 			app:layout_constraintCircleRadius="500dp"
@@ -589,18 +477,6 @@
 			app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			/>
-
-		<Constraint android:id="@+id/name4"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="16dp"
-
-			android:alpha="0"
-
-			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
-			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 		<Constraint android:id="@+id/pizza5"

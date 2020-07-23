@@ -11,8 +11,7 @@
 	>
 
 
-	<View
-		android:id="@+id/toolbar"
+	<View android:id="@+id/toolbar"
 		android:layout_height="?actionBarSize"
 		android:layout_width="0dp"
 
@@ -66,7 +65,7 @@
 	<View android:id="@+id/tableBackground"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
-		android:layout_marginBottom="100dp"
+		android:layout_marginBottom="50dp"
 
 
 		android:background="@drawable/table_background"
@@ -78,10 +77,10 @@
 		/>
 
 	<View android:id="@+id/pizzaViewsBounds"
-		android:layout_width="250dp"
-		android:layout_height="250dp"
+		android:layout_width="255dp"
+		android:layout_height="255dp"
 		android:layout_marginTop="24dp"
-		android:background="@null"
+		android:background="@drawable/pizza_plate"
 
 		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 		app:layout_constraintEnd_toEndOf="parent"
@@ -95,8 +94,6 @@
 		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
 
-		android:src="@drawable/pizza_1_firmennaya"
-
 		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
@@ -108,11 +105,6 @@
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
-
-		android:src="@drawable/pizza_2_bavarska"
-
-		android:scaleX="0.7"
-		android:scaleY="0.7"
 
 		app:layout_constraintCircle="@id/pizza1"
 		app:layout_constraintCircleRadius="300dp"
@@ -130,11 +122,6 @@
 		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
 
-		android:src="@drawable/pizza_3_margarita"
-
-		android:scaleX="0.7"
-		android:scaleY="0.7"
-
 		app:layout_constraintCircle="@id/pizza1"
 		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
@@ -151,11 +138,6 @@
 		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
 
-		android:src="@drawable/pizza_4_myasna"
-
-		android:scaleX="0.7"
-		android:scaleY="0.7"
-
 		app:layout_constraintCircle="@id/pizza1"
 		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
@@ -171,11 +153,6 @@
 		android:layout_height="250dp"
 		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
-
-		android:src="@drawable/pizza_5_po_selyanski"
-
-		android:scaleX="0.7"
-		android:scaleY="0.7"
 
 		app:layout_constraintCircle="@id/pizza1"
 		app:layout_constraintCircleRadius="500dp"
@@ -267,6 +244,20 @@
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
 
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/pizzaPrice"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+
+		android:text=""
+		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+		android:textSize="30sp"
+
+		app:layout_constraintTop_toBottomOf="@id/name1"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		/>
 
 
 

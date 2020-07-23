@@ -1,7 +1,7 @@
 package com.mmdev.pizzatime
 
 import android.os.Bundle
-import android.util.Log
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.mmdev.pizzatime.MainActivity.Direction.BACK
@@ -11,18 +11,29 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity: AppCompatActivity() {
 
 	private enum class Direction { BACK, FORWARD }
-	private data class Pizza(var name: String, var image: Int)
+	private data class Pizza(val name: String, val image: Int, val price: Int)
 
 
 	// size should be >= 5
+//	private val pizzaList = listOf(
+//			Pizza("Chef's pizza", R.color.colorAccent),
+//			Pizza("Bavarian pizza", R.color.colorPrimary),
+//			Pizza("Margherita", R.color.colorPrimaryDark),
+//			Pizza("Meat pizza", R.color.colorAccent),
+//			Pizza("Village pizza", R.color.colorPrimary) ,
+//			Pizza("Salami pizza", R.color.colorPrimaryDark) ,
+//			Pizza("Vegetarian pizza", R.color.colorAccent)
+//	)
+
+	// size should be >= 5
 	private val pizzaList = listOf(
-			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya),
-			Pizza("Bavarian pizza", R.drawable.pizza_2_bavarska),
-			Pizza("Margherita", R.drawable.pizza_3_margarita),
-			Pizza("Meat pizza", R.drawable.pizza_4_myasna),
-			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski) ,
-			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi) ,
-			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska)
+			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya, 14),
+			Pizza("Bavarian pizza", R.drawable.pizza_2_bavarska, 16),
+			Pizza("Margherita", R.drawable.pizza_3_margarita, 22),
+			Pizza("Meat pizza", R.drawable.pizza_4_myasna, 20),
+			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski, 25),
+			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi, 20),
+			Pizza("Vegetarian pizza", R.drawable.pizza_7_vegetarianska, 19)
 	)
 
 	private var currentPizzaInFocus: Pizza = pizzaList[0]
@@ -36,16 +47,24 @@ class MainActivity: AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
+		val a = AnimationUtils.loadAnimation(this, R.anim.textview_change_text_anim)
+
 		//init name for pizzas
 		name1.text = pizzaList[0].name
+		pizza1.setImageResource(pizzaList[0].image)
 		name2.text = pizzaList[1].name
+		pizza2.setImageResource(pizzaList[1].image)
 		name3.text = pizzaList[2].name
+		pizza3.setImageResource(pizzaList[2].image)
 		name4.text = pizzaList[3].name
+		pizza4.setImageResource(pizzaList[3].image)
 		name5.text = pizzaList[4].name
+		pizza5.setImageResource(pizzaList[4].image)
+
+		pizzaPrice.text = "${currentPizzaInFocus.price} $"
 
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
-
 
 			// 2131231040 -> 2131231012
 			// 2131231012 -> 2131231077
@@ -54,7 +73,6 @@ class MainActivity: AppCompatActivity() {
 			override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {
 
 				//Log.wtf("mylogs", "$start $end")
-
 
 				when (start) {
 					R.id.thirdPos -> when (end) {
@@ -91,8 +109,6 @@ class MainActivity: AppCompatActivity() {
 
 				when (dragDirection) {
 					FORWARD -> {
-//						if (currentItemInCenterIndex < pizzaList.size - 1) currentItemInCenterIndex++
-//						currentPizzaInCenter = pizzaList[currentItemInCenterIndex]
 
 						// (..-5) because 5 images from list are already used
 						// size should be greater or equals than 5
@@ -103,8 +119,6 @@ class MainActivity: AppCompatActivity() {
 
 					}
 					BACK -> {
-//						if (currentItemInCenterIndex > 0) currentItemInCenterIndex--
-//						currentPizzaInCenter = pizzaList[currentItemInCenterIndex]
 
 						if (currentId == R.id.secondPos && currentIter > 0) {
 							backwardChange(motionLayout)
@@ -115,12 +129,18 @@ class MainActivity: AppCompatActivity() {
 
 				}
 
-				Log.wtf("mylog", "current pizza in focus = ${currentPizzaInFocus.name}")
+				pizzaPrice.startAnimation(a)
+				pizzaPrice.text = "${currentPizzaInFocus.price} $"
+
 			}
 		})
-		//tvCardBadgeCount.visibility = View.GONE
 	}
 
+	/**
+	 * This method primary use to imitate views loop when swiping forward
+	 * Swap between thirdPos and fourthPos
+	 * ThirdPos always in center
+	 */
 	private fun forwardChange(motionLayout: MotionLayout){
 		motionLayout.setTransition(R.id.fourthToThird).also {
 			motionLayout.setTransitionDuration(0)
@@ -143,10 +163,13 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
-
-		//Log.wtf("mylog", "Going forward $currentIter")
 	}
 
+	/**
+	 * This method primary use to imitate views loop when swiping back
+	 * Swap between secondPos and thirdPos
+	 * ThirdPos always in center
+	 */
 	private fun backwardChange(motionLayout: MotionLayout) {
 		motionLayout.setTransition(R.id.secondToThird).also {
 			motionLayout.setTransitionDuration(0)
@@ -168,7 +191,5 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizzaList.find { it.name == name3.text }!!
-
-		//Log.wtf("mylog", "Going backward $currentIter")
 	}
 }
