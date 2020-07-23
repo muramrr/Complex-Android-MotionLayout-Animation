@@ -42,50 +42,23 @@ class MainActivity: AppCompatActivity() {
 
 	private var currentPizzaInFocus: Pizza = pizzaList[0]
 
-	private var currentIter = 0
-
-
 	private var sizeSelected : PizzaSize = M
 
-
+	private var currentIter = 0
+	private var currentConstraintSet: Int = R.id.firstPos
 	private var dragDirection: Direction = FORWARD
+
+
+
+
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		val priceChangeAnimation =
-			AnimationUtils.loadAnimation(this, R.anim.textview_change_text_anim)
+		setupInitialState()
 
-		// pizza name appearance anim
-		val inAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
-			duration = 300
-		}
-		// pizza name disappearing anim
-		val outAnim = AnimationUtils.loadAnimation(this, android.R.anim.fade_out).apply {
-			duration = 300
-		}
-
-		//apply anim to textSwitcher
-		pizzaName.apply {
-			inAnimation = inAnim
-			outAnimation = outAnim
-		}
-
-		//select size by default M
-		setSelectedSizeM()
-
-		//init imgs for pizza
-		pizzaImg_1.setImageResource(pizzaList[0].image)
-		pizzaImg_2.setImageResource(pizzaList[1].image)
-		pizzaImg_3.setImageResource(pizzaList[2].image)
-		pizzaImg_4.setImageResource(pizzaList[3].image)
-		pizzaImg_5.setImageResource(pizzaList[4].image)
-
-
-		//init first prices and names
-		pizzaName.setCurrentText(currentPizzaInFocus.name)
-		pizzaPrice.text = "$ ${currentPizzaInFocus.price}"
+		setupViews()
 
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
@@ -113,44 +86,122 @@ class MainActivity: AppCompatActivity() {
 
 				val findPizzaInFocus = {
 					when (currentId) {
-						R.id.firstPos -> currentPizzaInFocus = pizza1
-						R.id.secondPos -> currentPizzaInFocus = pizza2
-						R.id.thirdPos -> currentPizzaInFocus = pizza3
-						R.id.fourthPos -> currentPizzaInFocus = pizza4
-						R.id.lastPos -> currentPizzaInFocus = pizza5
+						R.id.firstPos -> {
+							currentPizzaInFocus = pizza1
+							pizzaViewsBounds.isClickable = true
+						}
+						R.id.secondPos -> {
+							currentPizzaInFocus = pizza2
+							pizzaViewsBounds.isClickable = true
+						}
+						R.id.thirdPos -> {
+							currentPizzaInFocus = pizza3
+							pizzaViewsBounds.isClickable = true
+						}
+						R.id.fourthPos -> {
+							currentPizzaInFocus = pizza4
+							pizzaViewsBounds.isClickable = true
+						}
+						R.id.lastPos -> {
+							currentPizzaInFocus = pizza5
+							pizzaViewsBounds.isClickable = true
+						}
 					}
 				}
 
 				when (dragDirection) {
 					FORWARD -> {
-
 						// (..-5) because 5 images from list are already used
 						// size should be greater or equals than 5
 						if (currentId == R.id.fourthPos && currentIter < pizzaList.size - 5) {
 							forwardChange(motionLayout)
 						}
 						else findPizzaInFocus.invoke()
-
 					}
 					BACK -> {
-
 						if (currentId == R.id.secondPos && currentIter > 0) {
 							backwardChange(motionLayout)
 						}
 						else findPizzaInFocus.invoke()
-
 					}
-
 				}
 
-				pizzaName.setText(currentPizzaInFocus.name)
+				if (currentId !in arrayOf(R.id.pizzaCustomizeState, R.id.preCustomizerState)) {
+					pizzaName.setText(currentPizzaInFocus.name)
+					pizzaPrice.setText("$${currentPizzaInFocus.price}")
+				}
 
-				pizzaPrice.startAnimation(priceChangeAnimation)
-				pizzaPrice.text = "$ ${currentPizzaInFocus.price}"
+				currentConstraintSet = currentId
 
 			}
 		})
 
+	}
+
+	private fun setupInitialState() {
+		//init imgs for pizza
+		pizzaImg_1.setImageResource(pizzaList[0].image)
+		pizzaImg_2.setImageResource(pizzaList[1].image)
+		pizzaImg_3.setImageResource(pizzaList[2].image)
+		pizzaImg_4.setImageResource(pizzaList[3].image)
+		pizzaImg_5.setImageResource(pizzaList[4].image)
+
+
+		//init first prices and names
+		pizzaName.setCurrentText(currentPizzaInFocus.name)
+		pizzaPrice.setCurrentText("$${currentPizzaInFocus.price}")
+
+		//select size by default M
+		setSelectedSizeM()
+	}
+
+	private fun setupViews() {
+		toolbarBackBtn.setOnClickListener {
+			motionLayout.setTransition(R.id.backToPizzaCarousel)
+			motionLayout.transitionToEnd()
+			toolbarBackBtn.isClickable = false
+			setupInitialState()
+		}
+
+		pizzaViewsBounds.setOnClickListener {
+			motionLayout.setTransition(currentConstraintSet, R.id.preCustomizerState).also {
+				motionLayout.setTransitionDuration(0)
+				pizzaImg_1.setImageResource(currentPizzaInFocus.image)
+			}
+			motionLayout.transitionToEnd()
+
+			motionLayout.setTransition(R.id.openCustomizer)
+			motionLayout.transitionToEnd()
+			//prevent to click again on this
+			pizzaViewsBounds.isClickable = false
+			toolbarBackBtn.isClickable = true
+		}
+
+		// pizza name appearance anim
+		val inAnimName = AnimationUtils.loadAnimation(this, android.R.anim.fade_in).apply {
+			duration = 300
+		}
+		// pizza name disappearing anim
+		val outAnimName = AnimationUtils.loadAnimation(this, android.R.anim.fade_out).apply {
+			duration = 300
+		}
+
+		//apply anim to textSwitcher
+		pizzaName.apply {
+			inAnimation = inAnimName
+			outAnimation = outAnimName
+		}
+
+		// pizza price appearance anim
+		val inAnimPrice = AnimationUtils.loadAnimation(this, R.anim.price_in)
+
+		// pizza price disappearing anim
+		val outAnimPrice = AnimationUtils.loadAnimation(this, R.anim.price_out)
+
+		pizzaPrice.apply {
+			inAnimation = inAnimPrice
+			outAnimation = outAnimPrice
+		}
 
 		btnSize_S.setOnClickListener { setSelectedSizeS() }
 		btnSize_M.setOnClickListener { setSelectedSizeM() }
@@ -162,7 +213,7 @@ class MainActivity: AppCompatActivity() {
 	 * Swap between thirdPos and fourthPos
 	 * ThirdPos always in center
 	 */
-	private fun forwardChange(motionLayout: MotionLayout){
+	private fun forwardChange(motionLayout: MotionLayout) {
 		motionLayout.setTransition(R.id.fourthToThird).also {
 			motionLayout.setTransitionDuration(0)
 		}
@@ -184,6 +235,7 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizza3
+		pizzaViewsBounds.isClickable = true
 	}
 
 	/**
@@ -212,24 +264,25 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizza3
+		pizzaViewsBounds.isClickable = true
 	}
 
 
-	private fun setSelectedSizeS(){
+	private fun setSelectedSizeS() {
 		btnSize_S.isSelected = true
 		sizeSelected = S
 		btnSize_M.isSelected = false
 		btnSize_L.isSelected = false
 	}
 
-	private fun setSelectedSizeM(){
+	private fun setSelectedSizeM() {
 		btnSize_S.isSelected = false
 		btnSize_M.isSelected = true
 		sizeSelected = M
 		btnSize_L.isSelected = false
 	}
 
-	private fun setSelectedSizeL(){
+	private fun setSelectedSizeL() {
 		btnSize_S.isSelected = false
 		btnSize_M.isSelected = false
 		btnSize_L.isSelected = true

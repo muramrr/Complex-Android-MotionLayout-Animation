@@ -12,6 +12,19 @@
 
 	<!-- app:layoutDescription="@xml/carousel_scene" -->
 
+	<View android:id="@+id/tableBackground"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="24dp"
+
+		android:background="@drawable/table_background"
+
+		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+		app:layout_constraintBottom_toBottomOf="@id/btnAddToCart"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		/>
+
 	<View android:id="@+id/toolbar"
 		android:layout_height="?actionBarSize"
 		android:layout_width="0dp"
@@ -19,6 +32,34 @@
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintTop_toTopOf="parent"
+		/>
+
+	<ImageButton android:id="@+id/toolbarBackBtn"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_marginStart="8dp"
+		android:background="@android:color/transparent"
+		android:clickable="false"
+
+		android:alpha="0"
+
+		android:src="@drawable/ic_arrow_back_24"
+
+		app:layout_constraintStart_toStartOf="@id/toolbar"
+		app:layout_constraintTop_toTopOf="@id/toolbar"
+		app:layout_constraintBottom_toBottomOf="@id/toolbar"
+		android:contentDescription="@null"
+		/>
+
+	<include android:id="@+id/cartWithBadge"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+
+		layout="@layout/cart_with_badge"
+
+		app:layout_constraintBottom_toBottomOf="@id/toolbar"
+		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+		app:layout_constraintTop_toTopOf="@id/toolbar"
 		/>
 
 	<!-- toolbar title-->
@@ -33,17 +74,6 @@
 
 		app:layout_constraintBottom_toBottomOf="@id/toolbar"
 		app:layout_constraintStart_toStartOf="@id/guidelineStart"
-		app:layout_constraintTop_toTopOf="@id/toolbar"
-		/>
-
-	<include android:id="@+id/cartWithBadge"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-
-		layout="@layout/cart_with_badge"
-
-		app:layout_constraintBottom_toBottomOf="@id/toolbar"
-		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 		app:layout_constraintTop_toTopOf="@id/toolbar"
 		/>
 
@@ -62,19 +92,6 @@
 
 		app:layout_constraintStart_toStartOf="@id/guidelineStart"
 		app:layout_constraintTop_toBottomOf="@id/toolbar"
-		/>
-
-	<View android:id="@+id/tableBackground"
-		android:layout_width="0dp"
-		android:layout_height="0dp"
-		android:layout_marginBottom="24dp"
-
-		android:background="@drawable/table_background"
-
-		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="@id/addToCartButton"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		/>
 
 	<View android:id="@+id/pizzaViewsBounds"
@@ -128,24 +145,45 @@
 	</TextSwitcher>
 
 	<!-- pizza price -->
-	<com.google.android.material.textview.MaterialTextView
-		android:id="@+id/pizzaPrice"
-		android:layout_width="wrap_content"
+	<TextSwitcher android:id="@+id/pizzaPrice"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
-
-		android:maxLines="1"
-		android:ellipsize="end"
-
-		android:text=""
-		android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-		android:textSize="@dimen/pizzaPriceTextSize"
-		android:textStyle="bold"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaName"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		/>
+		>
+
+		<com.google.android.material.textview.MaterialTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:maxLines="1"
+			android:ellipsize="end"
+
+			android:text=""
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+			android:textAlignment="center"
+			android:textSize="@dimen/pizzaPriceTextSize"
+			android:textStyle="bold"
+			/>
+
+		<com.google.android.material.textview.MaterialTextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+
+			android:maxLines="1"
+			android:ellipsize="end"
+
+			android:text=""
+			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+			android:textAlignment="center"
+			android:textSize="@dimen/pizzaPriceTextSize"
+			android:textStyle="bold"
+			/>
+
+	</TextSwitcher>
 
 	<LinearLayout android:id="@+id/pizzaSizeContainer"
 		android:layout_width="wrap_content"
@@ -203,7 +241,7 @@
 
 	</LinearLayout>
 
-	<ImageButton android:id="@+id/addToCartButton"
+	<ImageButton android:id="@+id/btnAddToCart"
 		android:layout_width="@dimen/btn_add_to_cart_size"
 		android:layout_height="@dimen/btn_add_to_cart_size"
 

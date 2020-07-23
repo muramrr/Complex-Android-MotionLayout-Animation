@@ -5,8 +5,8 @@
 	<ImageView android:id="@+id/pizzaImg_1"
 		android:layout_width="@dimen/pizzaImgSize"
 		android:layout_height="@dimen/pizzaImgSize"
-		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
+		android:scaleType="fitCenter"
 
 		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
 		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
@@ -18,69 +18,45 @@
 	<ImageView android:id="@+id/pizzaImg_2"
 		android:layout_width="@dimen/pizzaImgSize"
 		android:layout_height="@dimen/pizzaImgSize"
-		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
+		android:scaleType="fitCenter"
 
 		app:layout_constraintCircle="@id/pizzaImg_1"
-		app:layout_constraintCircleRadius="300dp"
+		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-
 		/>
 
 	<ImageView android:id="@+id/pizzaImg_3"
 		android:layout_width="@dimen/pizzaImgSize"
 		android:layout_height="@dimen/pizzaImgSize"
-		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
+		android:scaleType="fitCenter"
 
 		app:layout_constraintCircle="@id/pizzaImg_1"
 		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-
 		/>
 
 	<ImageView android:id="@+id/pizzaImg_4"
 		android:layout_width="@dimen/pizzaImgSize"
 		android:layout_height="@dimen/pizzaImgSize"
-		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
+		android:scaleType="fitCenter"
 
 		app:layout_constraintCircle="@id/pizzaImg_1"
 		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-
 		/>
 
 	<ImageView android:id="@+id/pizzaImg_5"
 		android:layout_width="@dimen/pizzaImgSize"
 		android:layout_height="@dimen/pizzaImgSize"
-		android:layout_marginTop="24dp"
 		android:contentDescription="@null"
+		android:scaleType="fitCenter"
 
 		app:layout_constraintCircle="@id/pizzaImg_1"
 		app:layout_constraintCircleRadius="500dp"
 		app:layout_constraintCircleAngle="120"
-
-		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
-		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
-		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
-		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
-
 		/>
 
 </merge>

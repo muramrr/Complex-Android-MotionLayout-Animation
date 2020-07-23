@@ -17,6 +17,18 @@
 
 	</Transition>
 
+	<Transition android:id="@+id/secondToFirst"
+		app:constraintSetStart="@id/secondPos"
+		app:constraintSetEnd="@id/firstPos"
+		app:duration="500"
+		>
+
+		<OnSwipe app:dragDirection="dragRight"
+			app:touchAnchorId="@id/pizzaImg_2"
+			/>
+
+	</Transition>
+
 	<Transition android:id="@+id/secondToThird"
 		app:constraintSetStart="@id/secondPos"
 		app:constraintSetEnd="@id/thirdPos"
@@ -76,6 +88,52 @@
 		<OnSwipe app:dragDirection="dragLeft"
 			app:touchAnchorId="@id/pizzaImg_4"
 			/>
+
+	</Transition>
+
+	<Transition android:id="@+id/backToPizzaCarousel"
+		app:constraintSetStart="@id/pizzaCustomizeState"
+		app:constraintSetEnd="@id/firstPos"
+		app:duration="500"
+		>
+
+
+	</Transition>
+
+	<Transition android:id="@+id/openCustomizer"
+		app:constraintSetStart="@id/preCustomizerState"
+		app:constraintSetEnd="@id/pizzaCustomizeState"
+		app:duration="500"
+		>
+
+		<KeyFrameSet>
+
+			<KeyAttribute
+				app:framePosition="20"
+				app:motionTarget="@id/pizzaName"
+				android:alpha="0"
+				android:scaleX="0"
+				android:scaleY="0"
+				/>
+
+			<KeyAttribute
+				app:framePosition="90"
+				app:motionTarget="@id/pizzaName"
+				android:alpha="0"
+				android:scaleX="1"
+				android:scaleY="1"
+				/>
+
+			<KeyAttribute
+				app:framePosition="60"
+				app:motionTarget="@id/toolbarBackBtn"
+				android:alpha="0"
+				android:translationX="20dp"
+				/>
+
+		</KeyFrameSet>
+
+
 
 	</Transition>
 
@@ -352,6 +410,131 @@
 			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
 			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			/>
+
+	</ConstraintSet>
+
+
+	<!-- this state used as transitional state between random pos state and customizer state -->
+	<!-- due to unknown reasons if clicking on second pizza in view scale 0.7 from secondPos
+	     on pizzaImg_1 will be exists -->
+	<ConstraintSet android:id="@+id/preCustomizerState">
+
+		<Constraint android:id="@+id/pizzaImg_1"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
+
+			android:scaleY="1.01"
+			android:scaleX="1.01"
+
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			/>
+
+	</ConstraintSet>
+
+	<ConstraintSet android:id="@+id/pizzaCustomizeState">
+
+		<Constraint android:id="@+id/tableBackground"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+
+			android:scaleX="1.2"
+			android:scaleY="1.2"
+
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			>
+
+			<CustomAttribute
+				app:attributeName="BackgroundColor"
+				app:customColorValue="@android:color/white"/>
+
+		</Constraint>
+
+		<!-- toolbar title-->
+		<Constraint android:id="@+id/tbTitle"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+
+			android:translationX="-400dp"
+
+			app:layout_constraintBottom_toBottomOf="@id/toolbar"
+			app:layout_constraintStart_toStartOf="@id/guidelineStart"
+			app:layout_constraintTop_toTopOf="@id/toolbar"
+			/>
+
+		<!-- pizza yellow label -->
+		<Constraint android:id="@+id/tvPizzaChip"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+
+			android:translationX="-400dp"
+
+			app:layout_constraintStart_toStartOf="@id/guidelineStart"
+			app:layout_constraintTop_toBottomOf="@id/toolbar"
+			/>
+
+		<Constraint android:id="@+id/toolbarBackBtn"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_marginStart="8dp"
+
+			android:alpha="1"
+
+			app:layout_constraintStart_toStartOf="@id/toolbar"
+			app:layout_constraintTop_toTopOf="@id/toolbar"
+			app:layout_constraintBottom_toBottomOf="@id/toolbar"
+
+			/>
+
+		<Constraint android:id="@+id/pizzaViewsBounds"
+			android:layout_width="@dimen/pizzaPlateSize"
+			android:layout_height="@dimen/pizzaPlateSize"
+			android:layout_marginTop="24dp"
+
+			app:layout_constraintTop_toBottomOf="@id/pizzaName"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+
+			/>
+
+		<Constraint android:id="@+id/pizzaImg_1"
+			android:layout_width="@dimen/pizzaImgSize"
+			android:layout_height="@dimen/pizzaImgSize"
+
+			android:rotation="50"
+
+			app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			/>
+
+		<!-- pizza name -->
+		<Constraint android:id="@+id/pizzaName"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+
+			app:layout_constraintBottom_toBottomOf="@id/toolbar"
+			app:layout_constraintStart_toStartOf="@id/guidelineStart"
+			app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+			app:layout_constraintTop_toTopOf="@id/toolbar"
+			/>
+
+		<!-- pizza price -->
+		<Constraint android:id="@+id/pizzaPrice"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="24dp"
+
+			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 	</ConstraintSet>
