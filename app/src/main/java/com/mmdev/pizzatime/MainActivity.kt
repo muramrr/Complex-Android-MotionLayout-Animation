@@ -18,23 +18,44 @@ class MainActivity: AppCompatActivity() {
 	private enum class PizzaSize { S, M, L }
 	private enum class PizzaToppings { MUSHROOMS, TOMATOES, BACON, CHEESE, CHILI }
 
+	private data class PizzaSizeAndPrice (val size: PizzaSize, val price: Int)
+	private data class PizzaToppingAndPrice (val topping: PizzaToppings, val price: Int)
+
+	private val pizzaToppingsList = listOf(
+			PizzaToppingAndPrice(MUSHROOMS, 1),
+			PizzaToppingAndPrice(TOMATOES, 2),
+			PizzaToppingAndPrice(BACON, 3),
+			PizzaToppingAndPrice(CHEESE, 1),
+			PizzaToppingAndPrice(CHILI, 2)
+	)
+
+	private val pizzaSizeList = listOf(
+			PizzaSizeAndPrice (S, 3),
+			PizzaSizeAndPrice (M, 5),
+			PizzaSizeAndPrice (L, 7)
+	)
+
 	private data class Pizza(val name: String,
 	                         val image: Int,
-	                         val price: Int,
-	                         var size: PizzaSize = M,
-	                         val toppings: MutableList<PizzaToppings> = mutableListOf())
+	                         var price: Int,
+	                         var size: PizzaSizeAndPrice = PizzaSizeAndPrice (M, 5),
+	                         val toppings: MutableList<PizzaToppingAndPrice> = mutableListOf()) {
+
+		fun copy() = Pizza (name, image, price, size, toppings)
+
+	}
 
 
 
 	// size should be >= 5
 	private val pizzaList = listOf(
-			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya, 14),
-			Pizza("Bavarian", R.drawable.pizza_2_bavarska, 16),
-			Pizza("Margherita", R.drawable.pizza_3_margarita, 22),
-			Pizza("Meat pizza", R.drawable.pizza_4_myasna, 20),
-			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski, 25),
-			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi, 20),
-			Pizza("Vegetarian", R.drawable.pizza_7_vegetarianska, 19)
+			Pizza("Chef's pizza", R.drawable.pizza_1_firmennaya, 10),
+			Pizza("Bavarian", R.drawable.pizza_2_bavarska, 12),
+			Pizza("Margherita", R.drawable.pizza_3_margarita, 10),
+			Pizza("Meat pizza", R.drawable.pizza_4_myasna, 13),
+			Pizza("Village pizza", R.drawable.pizza_5_po_selyanski, 11),
+			Pizza("Salami pizza", R.drawable.pizza_6_salyzmi, 9),
+			Pizza("Vegetarian", R.drawable.pizza_7_vegetarianska, 8)
 	)
 
 	private var pizza1 = pizzaList[0]
@@ -45,7 +66,7 @@ class MainActivity: AppCompatActivity() {
 
 	private var currentPizzaInFocus: Pizza = pizzaList[0]
 
-	private var sizeSelected : PizzaSize = M
+	private var sizeSelected : PizzaSizeAndPrice = pizzaSizeList[1]
 
 	private var currentIter = 0
 	private var dragDirection: Direction = FORWARD
@@ -58,9 +79,9 @@ class MainActivity: AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		setupInitialState()
-
 		setupViews()
+
+		setupInitialState()
 
 		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
 			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
@@ -88,11 +109,14 @@ class MainActivity: AppCompatActivity() {
 
 				val findPizzaInFocus = {
 					when (currentId) {
-						R.id.firstPos -> { currentPizzaInFocus = pizza1 }
-						R.id.secondPos -> { currentPizzaInFocus = pizza2 }
-						R.id.thirdPos -> { currentPizzaInFocus = pizza3 }
-						R.id.fourthPos -> { currentPizzaInFocus = pizza4 }
-						R.id.lastPos -> { currentPizzaInFocus = pizza5 }
+						R.id.firstPos -> {
+							currentPizzaInFocus = pizza1.copy()
+							setupInitialState()
+						}
+						R.id.secondPos -> { currentPizzaInFocus = pizza2.copy() }
+						R.id.thirdPos -> { currentPizzaInFocus = pizza3.copy() }
+						R.id.fourthPos -> { currentPizzaInFocus = pizza4.copy() }
+						R.id.lastPos -> { currentPizzaInFocus = pizza5.copy() }
 					}
 				}
 
@@ -117,7 +141,7 @@ class MainActivity: AppCompatActivity() {
 				                          R.id.preCustomizerState,
 				                          R.id.firstPos)) {
 					pizzaName.setText(currentPizzaInFocus.name)
-					pizzaPrice.setText("$${currentPizzaInFocus.price}")
+					applySizeToCurrentPizzaAndDisplay(sizeSelected)
 				}
 
 			}
@@ -133,22 +157,23 @@ class MainActivity: AppCompatActivity() {
 		pizzaImg_4.setImageResource(pizzaList[3].image)
 		pizzaImg_5.setImageResource(pizzaList[4].image)
 
-		//init first prices and names
-		pizzaName.setText(pizzaList[0].name)
-		pizzaPrice.setText("$${pizzaList[0].price}")
-
-		//select size by default M
-		setSelectedSizeM()
-
 		pizza1 = pizzaList[0]
 		pizza2 = pizzaList[1]
 		pizza3 = pizzaList[2]
 		pizza4 = pizzaList[3]
 		pizza5 = pizzaList[4]
 
-		currentPizzaInFocus = pizzaList[0]
+		currentPizzaInFocus = pizzaList[0].copy()
+		currentPizzaInFocus.price
+
+		//select size by default M
+		setSelectedSizeM()
+
 		currentIter = 0
 		dragDirection = FORWARD
+
+		//init first prices and names
+		pizzaName.setText(currentPizzaInFocus.name)
 
 		//clear toppings selection
 		btnAddMushrooms.isSelected = false
@@ -164,9 +189,8 @@ class MainActivity: AppCompatActivity() {
 		toolbarBackBtn.setOnClickListener {
 			motionLayout.setTransition(R.id.backToPizzaCarousel)
 			motionLayout.transitionToEnd()
-			toolbarBackBtn.isClickable = false
+			it.isClickable = false
 			pizzaViewsBounds.isClickable = true
-			setupInitialState()
 		}
 
 		//open pizza customizer
@@ -175,7 +199,7 @@ class MainActivity: AppCompatActivity() {
 			motionLayout.setTransition(R.id.openCustomizer)
 			motionLayout.transitionToEnd()
 			//prevent to click again on this
-			pizzaViewsBounds.isClickable = false
+			it.isClickable = false
 			toolbarBackBtn.isClickable = true
 		}
 
@@ -210,67 +234,77 @@ class MainActivity: AppCompatActivity() {
 		btnSize_L.setOnClickListener { setSelectedSizeL() }
 
 		btnAddMushrooms.setOnClickListener {
-			with(MUSHROOMS){
+			with(pizzaToppingsList[0]){
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					decreaseCurrentPizzaPrice(this.price)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					increaseCurrentPizzaPrice(this.price)
 				}
 			}
 		}
 
 		btnAddTomato.setOnClickListener {
-			with(TOMATOES){
+			with(pizzaToppingsList[1]){
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					decreaseCurrentPizzaPrice(this.price)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					increaseCurrentPizzaPrice(this.price)
 				}
 			}
 		}
 
 		btnAddBacon.setOnClickListener {
-			with(BACON){
+			with(pizzaToppingsList[2]){
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					decreaseCurrentPizzaPrice(this.price)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					increaseCurrentPizzaPrice(this.price)
 				}
 			}
 		}
 
 		btnAddCheese.setOnClickListener {
-			with(CHEESE){
+			with(pizzaToppingsList[3]){
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					decreaseCurrentPizzaPrice(this.price)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					increaseCurrentPizzaPrice(this.price)
 				}
 			}
 		}
 
 		btnAddChili.setOnClickListener {
-			with(CHILI){
+			with(pizzaToppingsList[4]){
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					decreaseCurrentPizzaPrice(this.price)
 					ivHotIndicator.animate().translationX(initialTranslationX).setDuration(500)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					increaseCurrentPizzaPrice(this.price)
 					ivHotIndicator.animate().translationX(0f).setDuration(500)
 				}
 			}
@@ -303,7 +337,7 @@ class MainActivity: AppCompatActivity() {
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizza3
+		currentPizzaInFocus = pizza3.copy()
 	}
 
 	/**
@@ -331,28 +365,67 @@ class MainActivity: AppCompatActivity() {
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizza3
+		currentPizzaInFocus = pizza3.copy()
 	}
 
 
 	private fun setSelectedSizeS() {
 		btnSize_S.isSelected = true
-		sizeSelected = S
 		btnSize_M.isSelected = false
 		btnSize_L.isSelected = false
+
+		btnSize_S.isClickable = false
+		btnSize_M.isClickable = true
+		btnSize_L.isClickable = true
+
+		sizeSelected = pizzaSizeList[0]
+		applySizeToCurrentPizzaAndDisplay(sizeSelected)
 	}
 
 	private fun setSelectedSizeM() {
 		btnSize_S.isSelected = false
 		btnSize_M.isSelected = true
-		sizeSelected = M
 		btnSize_L.isSelected = false
+
+		btnSize_S.isClickable = true
+		btnSize_M.isClickable = false
+		btnSize_L.isClickable = true
+
+		sizeSelected = pizzaSizeList[1]
+		applySizeToCurrentPizzaAndDisplay(sizeSelected)
 	}
 
 	private fun setSelectedSizeL() {
 		btnSize_S.isSelected = false
 		btnSize_M.isSelected = false
 		btnSize_L.isSelected = true
-		sizeSelected = L
+
+		btnSize_S.isClickable = true
+		btnSize_M.isClickable = true
+		btnSize_L.isClickable = false
+
+		sizeSelected = pizzaSizeList[2]
+		applySizeToCurrentPizzaAndDisplay(sizeSelected)
+	}
+
+	private fun increaseCurrentPizzaPrice(price: Int) {
+		currentPizzaInFocus.price += price
+		pizzaPrice.setText("$${currentPizzaInFocus.price}")
+	}
+
+	private fun decreaseCurrentPizzaPrice(price: Int) {
+		currentPizzaInFocus.price -= price
+		pizzaPrice.setText("$${currentPizzaInFocus.price}")
+	}
+
+	private fun applySizeToCurrentPizzaAndDisplay(pizzaSizeAndPrice: PizzaSizeAndPrice) {
+		if (currentPizzaInFocus.size != pizzaSizeAndPrice){
+			currentPizzaInFocus.price -= currentPizzaInFocus.size.price
+			currentPizzaInFocus.size = pizzaSizeAndPrice
+			currentPizzaInFocus.price += pizzaSizeAndPrice.price
+		}
+		else currentPizzaInFocus.price += currentPizzaInFocus.size.price
+
+		pizzaPrice.setText("$${currentPizzaInFocus.price}")
 	}
 }
