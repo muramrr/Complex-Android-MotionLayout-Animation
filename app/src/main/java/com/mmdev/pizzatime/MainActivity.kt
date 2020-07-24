@@ -21,6 +21,17 @@ class MainActivity: AppCompatActivity() {
 	private data class PizzaSizeAndPrice (val size: PizzaSize, val price: Int)
 	private data class PizzaToppingAndPrice (val topping: PizzaToppings, val price: Int)
 
+	private data class Pizza(val name: String,
+	                         val image: Int,
+	                         val price: Int,
+	                         var size: PizzaSizeAndPrice = PizzaSizeAndPrice (M, 5),
+	                         val toppings: HashSet<PizzaToppingAndPrice> = HashSet(),
+	                         var resultPrice: Int = price + size.price) {
+
+		fun clone() = Pizza (name, image, price, size, hashSetOf(), resultPrice)
+
+	}
+
 	private val pizzaToppingsList = listOf(
 			PizzaToppingAndPrice(MUSHROOMS, 1),
 			PizzaToppingAndPrice(TOMATOES, 2),
@@ -34,18 +45,6 @@ class MainActivity: AppCompatActivity() {
 			PizzaSizeAndPrice (M, 5),
 			PizzaSizeAndPrice (L, 7)
 	)
-
-	private data class Pizza(val name: String,
-	                         val image: Int,
-	                         var price: Int,
-	                         var size: PizzaSizeAndPrice = PizzaSizeAndPrice (M, 5),
-	                         val toppings: MutableList<PizzaToppingAndPrice> = mutableListOf()) {
-
-		fun copy() = Pizza (name, image, price, size, toppings)
-
-	}
-
-
 
 	// size should be >= 5
 	private val pizzaList = listOf(
@@ -83,69 +82,7 @@ class MainActivity: AppCompatActivity() {
 
 		setupInitialState()
 
-		motionLayout.addTransitionListener(object : MotionLayout.TransitionListener {
-			override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
-
-			// 2131231040 -> 2131231012
-			// 2131231012 -> 2131231077
-			// 2131231077 -> 2131230881
-			// 2131230881 -> 2131230913
-			override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {
-
-				//Log.wtf("mylogs", "$start $end")
-
-				when (start) {
-					R.id.thirdPos -> when (end) {
-						R.id.secondPos -> dragDirection = BACK
-						R.id.fourthPos -> dragDirection = FORWARD
-					}
-				}
-
-			}
-
-			override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
-
-			override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
-
-				val findPizzaInFocus = {
-					when (currentId) {
-						R.id.firstPos -> {
-							currentPizzaInFocus = pizza1.copy()
-							setupInitialState()
-						}
-						R.id.secondPos -> { currentPizzaInFocus = pizza2.copy() }
-						R.id.thirdPos -> { currentPizzaInFocus = pizza3.copy() }
-						R.id.fourthPos -> { currentPizzaInFocus = pizza4.copy() }
-						R.id.lastPos -> { currentPizzaInFocus = pizza5.copy() }
-					}
-				}
-
-				when (dragDirection) {
-					FORWARD -> {
-						// (..-5) because 5 images from list are already used
-						// size should be greater or equals than 5
-						if (currentId == R.id.fourthPos && currentIter < pizzaList.size - 5) {
-							forwardChange(motionLayout)
-						}
-						else findPizzaInFocus.invoke()
-					}
-					BACK -> {
-						if (currentId == R.id.secondPos && currentIter > 0) {
-							backwardChange(motionLayout)
-						}
-						else findPizzaInFocus.invoke()
-					}
-				}
-
-				if (currentId !in arrayOf(R.id.pizzaCustomizeState,
-				                          R.id.preCustomizerState,
-				                          R.id.firstPos)) {
-					pizzaName.setText(currentPizzaInFocus.name)
-					applySizeToCurrentPizzaAndDisplay(sizeSelected)
-				}
-
-			}
-		})
+		motionLayout.addTransitionListener(motionListener)
 
 	}
 
@@ -163,8 +100,7 @@ class MainActivity: AppCompatActivity() {
 		pizza4 = pizzaList[3]
 		pizza5 = pizzaList[4]
 
-		currentPizzaInFocus = pizzaList[0].copy()
-		currentPizzaInFocus.price
+		currentPizzaInFocus = pizzaList[0].clone()
 
 		//select size by default M
 		setSelectedSizeM()
@@ -311,6 +247,70 @@ class MainActivity: AppCompatActivity() {
 		}
 	}
 
+	private val motionListener = object : MotionLayout.TransitionListener {
+		override fun onTransitionTrigger(motionLayout: MotionLayout, triggerId: Int, positive: Boolean, progress: Float) {}
+
+		// 2131231040 -> 2131231012
+		// 2131231012 -> 2131231077
+		// 2131231077 -> 2131230881
+		// 2131230881 -> 2131230913
+		override fun onTransitionStarted(motionLayout: MotionLayout, start: Int, end: Int) {
+
+			//Log.wtf("mylogs", "$start $end")
+
+			when (start) {
+				R.id.thirdPos -> when (end) {
+					R.id.secondPos -> dragDirection = BACK
+					R.id.fourthPos -> dragDirection = FORWARD
+				}
+			}
+
+		}
+
+		override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
+
+		override fun onTransitionCompleted(motionLayout: MotionLayout, currentId: Int) {
+
+			val findPizzaInFocus = {
+				when (currentId) {
+					R.id.firstPos -> {
+						currentPizzaInFocus = pizza1.clone()
+						setupInitialState()
+					}
+					R.id.secondPos -> { currentPizzaInFocus = pizza2.clone() }
+					R.id.thirdPos -> { currentPizzaInFocus = pizza3.clone() }
+					R.id.fourthPos -> { currentPizzaInFocus = pizza4.clone() }
+					R.id.lastPos -> { currentPizzaInFocus = pizza5.clone() }
+				}
+			}
+
+			when (dragDirection) {
+				FORWARD -> {
+					// (..-5) because 5 images from list are already used
+					// size should be greater or equals than 5
+					if (currentId == R.id.fourthPos && currentIter < pizzaList.size - 5) {
+						forwardChange(motionLayout)
+					}
+					else findPizzaInFocus.invoke()
+				}
+				BACK -> {
+					if (currentId == R.id.secondPos && currentIter > 0) {
+						backwardChange(motionLayout)
+					}
+					else findPizzaInFocus.invoke()
+				}
+			}
+
+			if (currentId !in arrayOf(R.id.pizzaCustomizeState,
+			                          R.id.preCustomizerState,
+			                          R.id.firstPos)) {
+				pizzaName.setText(currentPizzaInFocus.name)
+				applySizeToCurrentPizzaAndDisplay(sizeSelected)
+			}
+		}
+	}
+
+
 	/**
 	 * This method primary use to imitate views loop when swiping forward
 	 * Swap between thirdPos and fourthPos
@@ -332,12 +332,12 @@ class MainActivity: AppCompatActivity() {
 		pizzaImg_4.setImageDrawable(pizzaImg_5.drawable)
 		pizza4 = pizza5
 		// (...+4) because 4 images from list are already used
-		pizza5 = pizzaList[currentIter + 4]
 		pizzaImg_5.setImageResource(pizzaList[currentIter + 4].image)
+		pizza5 = pizzaList[currentIter + 4]
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizza3.copy()
+		currentPizzaInFocus = pizza3.clone()
 	}
 
 	/**
@@ -365,7 +365,7 @@ class MainActivity: AppCompatActivity() {
 
 
 		//third pos in focus
-		currentPizzaInFocus = pizza3.copy()
+		currentPizzaInFocus = pizza3.clone()
 	}
 
 
@@ -408,24 +408,30 @@ class MainActivity: AppCompatActivity() {
 		applySizeToCurrentPizzaAndDisplay(sizeSelected)
 	}
 
-	private fun increaseCurrentPizzaPrice(price: Int) {
-		currentPizzaInFocus.price += price
-		pizzaPrice.setText("$${currentPizzaInFocus.price}")
+	private fun increaseCurrentPizzaPrice(toppingPrice: Int) {
+		currentPizzaInFocus.resultPrice += toppingPrice
+		pizzaPrice.setText("$${currentPizzaInFocus.resultPrice}")
 	}
 
-	private fun decreaseCurrentPizzaPrice(price: Int) {
-		currentPizzaInFocus.price -= price
-		pizzaPrice.setText("$${currentPizzaInFocus.price}")
+	private fun decreaseCurrentPizzaPrice(toppingPrice: Int) {
+		currentPizzaInFocus.resultPrice -= toppingPrice
+		pizzaPrice.setText("$${currentPizzaInFocus.resultPrice}")
 	}
 
 	private fun applySizeToCurrentPizzaAndDisplay(pizzaSizeAndPrice: PizzaSizeAndPrice) {
-		if (currentPizzaInFocus.size != pizzaSizeAndPrice){
-			currentPizzaInFocus.price -= currentPizzaInFocus.size.price
-			currentPizzaInFocus.size = pizzaSizeAndPrice
-			currentPizzaInFocus.price += pizzaSizeAndPrice.price
+		if (currentPizzaInFocus.size != pizzaSizeAndPrice) {
+			currentPizzaInFocus.run {
+				resultPrice -= size.price
+				size = pizzaSizeAndPrice
+				resultPrice += pizzaSizeAndPrice.price
+			}
 		}
-		else currentPizzaInFocus.price += currentPizzaInFocus.size.price
+		//due to unknown reasons motionLayout removes object from screen
+		//pizzaPrice.setText("$${currentPizzaInFocus.resultPrice}")
+		pizzaPrice.setCurrentText("$${currentPizzaInFocus.resultPrice}")
+	}
 
-		pizzaPrice.setText("$${currentPizzaInFocus.price}")
+	override fun onBackPressed() {
+		toolbarBackBtn.performClick()
 	}
 }
