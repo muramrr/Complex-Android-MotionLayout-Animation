@@ -159,6 +159,7 @@ class MainActivity: AppCompatActivity() {
 	}
 
 	private fun setupViews() {
+		val initialTranslationX = ivHotIndicator.translationX
 		//back to pizzas carousel
 		toolbarBackBtn.setOnClickListener {
 			motionLayout.setTransition(R.id.backToPizzaCarousel)
@@ -265,10 +266,12 @@ class MainActivity: AppCompatActivity() {
 				if (it.isSelected) {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
+					ivHotIndicator.animate().translationX(initialTranslationX).setDuration(500)
 				}
 				else {
 					it.isSelected = true
 					currentPizzaInFocus.toppings.add(this)
+					ivHotIndicator.animate().translationX(0f).setDuration(500)
 				}
 			}
 		}

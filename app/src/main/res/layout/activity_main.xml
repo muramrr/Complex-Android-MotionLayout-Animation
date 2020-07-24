@@ -5,6 +5,7 @@
 	android:layout_width="match_parent"
 
 	app:layoutDescription="@xml/carousel_scene"
+	app:motionDebug="SHOW_ALL"
 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -343,6 +344,24 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintBottom_toBottomOf="parent"
 
+		android:contentDescription="@null"
+		/>
+
+	<ImageView
+		android:id="@+id/ivHotIndicator"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:layout_margin="16dp"
+
+		android:translationX="100dp"
+
+		android:src="@drawable/ic_fire_24"
+
+		app:layout_constraintVertical_bias="0.2"
+		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
+		app:layout_constraintBottom_toBottomOf="@id/pizzaViewsBounds"
+		app:layout_constraintStart_toEndOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 		android:contentDescription="@null"
 		/>
 
