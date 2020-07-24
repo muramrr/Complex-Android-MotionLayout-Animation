@@ -125,7 +125,6 @@
 			android:maxLines="1"
 			android:ellipsize="end"
 
-			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 			android:textAlignment="center"
 			/>
@@ -137,7 +136,6 @@
 			android:maxLines="1"
 			android:ellipsize="end"
 
-			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 			android:textAlignment="center"
 			/>
@@ -162,7 +160,6 @@
 			android:maxLines="1"
 			android:ellipsize="end"
 
-			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 			android:textAlignment="center"
 			android:textSize="@dimen/pizzaPriceTextSize"
@@ -176,7 +173,6 @@
 			android:maxLines="1"
 			android:ellipsize="end"
 
-			android:text=""
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
 			android:textAlignment="center"
 			android:textSize="@dimen/pizzaPriceTextSize"
@@ -191,8 +187,8 @@
 		android:layout_marginTop="8dp"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaPrice"
-		app:layout_constraintStart_toStartOf="@id/tableBackground"
-		app:layout_constraintEnd_toEndOf="@id/tableBackground"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 		>
 
 		<com.google.android.material.button.MaterialButton
@@ -241,6 +237,85 @@
 
 	</LinearLayout>
 
+	<LinearLayout android:id="@+id/ingredientsContainer"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+
+		android:alpha="0"
+		android:translationY="300dp"
+
+		app:layout_constraintTop_toBottomOf="@id/pizzaSizeContainer"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnAddMushrooms"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+
+			app:backgroundTint="@color/btn_size_selected"
+			app:icon="@drawable/ic_mushroom_24"
+			app:iconSize="32dp"
+			app:iconTintMode="multiply"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnAddTomato"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+
+			app:backgroundTint="@color/btn_size_selected"
+			app:icon="@drawable/ic_tomato_24"
+			app:iconSize="32dp"
+			app:iconTintMode="multiply"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnAddBacon"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+
+			app:backgroundTint="@color/btn_size_selected"
+			app:icon="@drawable/ic_bacon_24"
+			app:iconSize="32dp"
+			app:iconTintMode="multiply"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnAddCheese"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+
+			app:backgroundTint="@color/btn_size_selected"
+			app:icon="@drawable/ic_cheese_24"
+			app:iconSize="32dp"
+			app:iconTintMode="multiply"
+
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+		<com.google.android.material.button.MaterialButton
+			android:id="@+id/btnAddChili"
+			android:layout_width="64dp"
+			android:layout_height="64dp"
+
+			app:backgroundTint="@color/btn_size_selected"
+			app:icon="@drawable/ic_chili_pepper_24"
+			app:iconSize="32dp"
+			app:iconTintMode="multiply"
+			style="@style/My.Widget.Button.IconOnly.Rounded"
+			/>
+
+	</LinearLayout>
+
 	<ImageButton android:id="@+id/btnAddToCart"
 		android:layout_width="@dimen/btn_add_to_cart_size"
 		android:layout_height="@dimen/btn_add_to_cart_size"
@@ -257,6 +332,8 @@
 
 		android:contentDescription="@null"
 		/>
+
+
 
 
 

@@ -131,8 +131,8 @@ class MainActivity: AppCompatActivity() {
 		pizzaImg_5.setImageResource(pizzaList[4].image)
 
 		//init first prices and names
-		pizzaName.setCurrentText(pizzaList[0].name)
-		pizzaPrice.setCurrentText("$${pizzaList[0].price}")
+		pizzaName.setText(pizzaList[0].name)
+		pizzaPrice.setText("$${pizzaList[0].price}")
 
 		//select size by default M
 		setSelectedSizeM()

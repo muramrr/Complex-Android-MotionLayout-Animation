@@ -91,10 +91,12 @@
 
 	</Transition>
 
+
+
 	<Transition android:id="@+id/backToPizzaCarousel"
 		app:constraintSetStart="@id/pizzaCustomizeState"
 		app:constraintSetEnd="@id/firstPos"
-		app:duration="500"
+		app:duration="800"
 		>
 
 		<KeyFrameSet>
@@ -113,6 +115,11 @@
 				android:scaleY="1"
 				/>
 
+			<KeyAttribute app:motionTarget="@id/ingredientsContainer"
+				app:framePosition="60"
+				android:alpha="0"
+				/>
+
 		</KeyFrameSet>
 
 	</Transition>
@@ -120,7 +127,7 @@
 	<Transition android:id="@+id/openCustomizer"
 		app:constraintSetStart="@id/preCustomizerState"
 		app:constraintSetEnd="@id/pizzaCustomizeState"
-		app:duration="500"
+		app:duration="800"
 		>
 
 		<KeyFrameSet>
@@ -143,6 +150,11 @@
 				app:framePosition="60"
 				android:alpha="0"
 				android:translationX="20dp"
+				/>
+
+			<KeyAttribute app:motionTarget="@id/ingredientsContainer"
+				app:framePosition="20"
+				android:alpha="0"
 				/>
 
 		</KeyFrameSet>
@@ -461,13 +473,7 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
-			>
-
-			<CustomAttribute
-				app:attributeName="BackgroundColor"
-				app:customColorValue="@android:color/white"/>
-
-		</Constraint>
+			/>
 
 		<!-- toolbar title-->
 		<Constraint android:id="@+id/tbTitle"
@@ -534,13 +540,13 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 
-			android:scaleX="1.2"
-			android:scaleY="1.2"
+			android:scaleX="1.4"
+			android:scaleY="1.4"
 
 			app:layout_constraintBottom_toBottomOf="@id/toolbar"
-			app:layout_constraintStart_toStartOf="@id/guidelineStart"
-			app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 			app:layout_constraintTop_toTopOf="@id/toolbar"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			/>
 
 		<!-- pizza price -->
@@ -552,6 +558,20 @@
 			app:layout_constraintTop_toBottomOf="@id/pizzaViewsBounds"
 			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			/>
+
+		<!-- pizza additional ingredients -->
+		<Constraint android:id="@+id/ingredientsContainer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+
+
+			android:alpha="1"
+
+			app:layout_constraintTop_toBottomOf="@id/pizzaSizeContainer"
+			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+			app:layout_constraintBottom_toTopOf="@id/btnAddToCart"
 			/>
 
 	</ConstraintSet>
