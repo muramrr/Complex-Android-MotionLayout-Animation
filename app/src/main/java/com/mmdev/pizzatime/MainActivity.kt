@@ -45,7 +45,6 @@ class MainActivity: AppCompatActivity() {
 	private var sizeSelected : PizzaSize = M
 
 	private var currentIter = 0
-	private var currentConstraintSet: Int = R.id.firstPos
 	private var dragDirection: Direction = FORWARD
 
 
@@ -86,26 +85,11 @@ class MainActivity: AppCompatActivity() {
 
 				val findPizzaInFocus = {
 					when (currentId) {
-						R.id.firstPos -> {
-							currentPizzaInFocus = pizza1
-							pizzaViewsBounds.isClickable = true
-						}
-						R.id.secondPos -> {
-							currentPizzaInFocus = pizza2
-							pizzaViewsBounds.isClickable = true
-						}
-						R.id.thirdPos -> {
-							currentPizzaInFocus = pizza3
-							pizzaViewsBounds.isClickable = true
-						}
-						R.id.fourthPos -> {
-							currentPizzaInFocus = pizza4
-							pizzaViewsBounds.isClickable = true
-						}
-						R.id.lastPos -> {
-							currentPizzaInFocus = pizza5
-							pizzaViewsBounds.isClickable = true
-						}
+						R.id.firstPos -> { currentPizzaInFocus = pizza1 }
+						R.id.secondPos -> { currentPizzaInFocus = pizza2 }
+						R.id.thirdPos -> { currentPizzaInFocus = pizza3 }
+						R.id.fourthPos -> { currentPizzaInFocus = pizza4 }
+						R.id.lastPos -> { currentPizzaInFocus = pizza5 }
 					}
 				}
 
@@ -126,12 +110,12 @@ class MainActivity: AppCompatActivity() {
 					}
 				}
 
-				if (currentId !in arrayOf(R.id.pizzaCustomizeState, R.id.preCustomizerState)) {
+				if (currentId !in arrayOf(R.id.pizzaCustomizeState,
+				                          R.id.preCustomizerState,
+				                          R.id.firstPos)) {
 					pizzaName.setText(currentPizzaInFocus.name)
 					pizzaPrice.setText("$${currentPizzaInFocus.price}")
 				}
-
-				currentConstraintSet = currentId
 
 			}
 		})
@@ -146,30 +130,37 @@ class MainActivity: AppCompatActivity() {
 		pizzaImg_4.setImageResource(pizzaList[3].image)
 		pizzaImg_5.setImageResource(pizzaList[4].image)
 
-
 		//init first prices and names
-		pizzaName.setCurrentText(currentPizzaInFocus.name)
-		pizzaPrice.setCurrentText("$${currentPizzaInFocus.price}")
+		pizzaName.setCurrentText(pizzaList[0].name)
+		pizzaPrice.setCurrentText("$${pizzaList[0].price}")
 
 		//select size by default M
 		setSelectedSizeM()
+
+		pizza1 = pizzaList[0]
+		pizza2 = pizzaList[1]
+		pizza3 = pizzaList[2]
+		pizza4 = pizzaList[3]
+		pizza5 = pizzaList[4]
+
+		currentPizzaInFocus = pizzaList[0]
+		currentIter = 0
+		dragDirection = FORWARD
 	}
 
 	private fun setupViews() {
+		//back to pizzas carousel
 		toolbarBackBtn.setOnClickListener {
 			motionLayout.setTransition(R.id.backToPizzaCarousel)
 			motionLayout.transitionToEnd()
 			toolbarBackBtn.isClickable = false
+			pizzaViewsBounds.isClickable = true
 			setupInitialState()
 		}
 
+		//open pizza customizer
 		pizzaViewsBounds.setOnClickListener {
-			motionLayout.setTransition(currentConstraintSet, R.id.preCustomizerState).also {
-				motionLayout.setTransitionDuration(0)
-				pizzaImg_1.setImageResource(currentPizzaInFocus.image)
-			}
-			motionLayout.transitionToEnd()
-
+			pizzaImg_1.setImageResource(currentPizzaInFocus.image)
 			motionLayout.setTransition(R.id.openCustomizer)
 			motionLayout.transitionToEnd()
 			//prevent to click again on this
@@ -235,7 +226,6 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizza3
-		pizzaViewsBounds.isClickable = true
 	}
 
 	/**
@@ -264,7 +254,6 @@ class MainActivity: AppCompatActivity() {
 
 		//third pos in focus
 		currentPizzaInFocus = pizza3
-		pizzaViewsBounds.isClickable = true
 	}
 
 

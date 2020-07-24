@@ -97,6 +97,23 @@
 		app:duration="500"
 		>
 
+		<KeyFrameSet>
+
+			<KeyAttribute app:motionTarget="@id/pizzaName"
+				app:framePosition="10"
+				android:alpha="0"
+				android:scaleX="0"
+				android:scaleY="0"
+				/>
+
+			<KeyAttribute app:motionTarget="@id/pizzaName"
+				app:framePosition="90"
+				android:alpha="0"
+				android:scaleX="1"
+				android:scaleY="1"
+				/>
+
+		</KeyFrameSet>
 
 	</Transition>
 
@@ -108,32 +125,27 @@
 
 		<KeyFrameSet>
 
-			<KeyAttribute
+			<KeyAttribute app:motionTarget="@id/pizzaName"
 				app:framePosition="20"
-				app:motionTarget="@id/pizzaName"
 				android:alpha="0"
 				android:scaleX="0"
 				android:scaleY="0"
 				/>
 
-			<KeyAttribute
+			<KeyAttribute app:motionTarget="@id/pizzaName"
 				app:framePosition="90"
-				app:motionTarget="@id/pizzaName"
 				android:alpha="0"
 				android:scaleX="1"
 				android:scaleY="1"
 				/>
 
-			<KeyAttribute
+			<KeyAttribute app:motionTarget="@id/toolbarBackBtn"
 				app:framePosition="60"
-				app:motionTarget="@id/toolbarBackBtn"
 				android:alpha="0"
 				android:translationX="20dp"
 				/>
 
 		</KeyFrameSet>
-
-
 
 	</Transition>
 
@@ -416,8 +428,8 @@
 
 
 	<!-- this state used as transitional state between random pos state and customizer state -->
-	<!-- due to unknown reasons if clicking on second pizza in view scale 0.7 from secondPos
-	     on pizzaImg_1 will be exists -->
+	<!-- due to unknown reasons if clicking on second pizza in view scale 0.7 from secondPos -->
+	<!-- on pizzaImg_1 will be exists -->
 	<ConstraintSet android:id="@+id/preCustomizerState">
 
 		<Constraint android:id="@+id/pizzaImg_1"
@@ -432,6 +444,7 @@
 			app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
 			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
+
 
 	</ConstraintSet>
 
@@ -515,10 +528,14 @@
 			app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 			/>
 
+
 		<!-- pizza name -->
 		<Constraint android:id="@+id/pizzaName"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+
+			android:scaleX="1.2"
+			android:scaleY="1.2"
 
 			app:layout_constraintBottom_toBottomOf="@id/toolbar"
 			app:layout_constraintStart_toStartOf="@id/guidelineStart"
@@ -528,7 +545,7 @@
 
 		<!-- pizza price -->
 		<Constraint android:id="@+id/pizzaPrice"
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="24dp"
 
