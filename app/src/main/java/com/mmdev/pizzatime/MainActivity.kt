@@ -7,6 +7,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import com.mmdev.pizzatime.MainActivity.Direction.BACK
 import com.mmdev.pizzatime.MainActivity.Direction.FORWARD
 import com.mmdev.pizzatime.MainActivity.PizzaSize.*
+import com.mmdev.pizzatime.MainActivity.PizzaToppings.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.pizza_views.*
 
@@ -15,11 +16,13 @@ class MainActivity: AppCompatActivity() {
 
 	private enum class Direction { BACK, FORWARD }
 	private enum class PizzaSize { S, M, L }
+	private enum class PizzaToppings { MUSHROOMS, TOMATOES, BACON, CHEESE, CHILI }
 
 	private data class Pizza(val name: String,
 	                         val image: Int,
 	                         val price: Int,
-	                         var size: PizzaSize = M)
+	                         var size: PizzaSize = M,
+	                         val toppings: MutableList<PizzaToppings> = mutableListOf())
 
 
 
@@ -146,6 +149,13 @@ class MainActivity: AppCompatActivity() {
 		currentPizzaInFocus = pizzaList[0]
 		currentIter = 0
 		dragDirection = FORWARD
+
+		//clear toppings selection
+		btnAddMushrooms.isSelected = false
+		btnAddTomato.isSelected = false
+		btnAddBacon.isSelected = false
+		btnAddCheese.isSelected = false
+		btnAddChili.isSelected = false
 	}
 
 	private fun setupViews() {
@@ -197,6 +207,71 @@ class MainActivity: AppCompatActivity() {
 		btnSize_S.setOnClickListener { setSelectedSizeS() }
 		btnSize_M.setOnClickListener { setSelectedSizeM() }
 		btnSize_L.setOnClickListener { setSelectedSizeL() }
+
+		btnAddMushrooms.setOnClickListener {
+			with(MUSHROOMS){
+				if (it.isSelected) {
+					it.isSelected = false
+					currentPizzaInFocus.toppings.remove(this)
+				}
+				else {
+					it.isSelected = true
+					currentPizzaInFocus.toppings.add(this)
+				}
+			}
+		}
+
+		btnAddTomato.setOnClickListener {
+			with(TOMATOES){
+				if (it.isSelected) {
+					it.isSelected = false
+					currentPizzaInFocus.toppings.remove(this)
+				}
+				else {
+					it.isSelected = true
+					currentPizzaInFocus.toppings.add(this)
+				}
+			}
+		}
+
+		btnAddBacon.setOnClickListener {
+			with(BACON){
+				if (it.isSelected) {
+					it.isSelected = false
+					currentPizzaInFocus.toppings.remove(this)
+				}
+				else {
+					it.isSelected = true
+					currentPizzaInFocus.toppings.add(this)
+				}
+			}
+		}
+
+		btnAddCheese.setOnClickListener {
+			with(CHEESE){
+				if (it.isSelected) {
+					it.isSelected = false
+					currentPizzaInFocus.toppings.remove(this)
+				}
+				else {
+					it.isSelected = true
+					currentPizzaInFocus.toppings.add(this)
+				}
+			}
+		}
+
+		btnAddChili.setOnClickListener {
+			with(CHILI){
+				if (it.isSelected) {
+					it.isSelected = false
+					currentPizzaInFocus.toppings.remove(this)
+				}
+				else {
+					it.isSelected = true
+					currentPizzaInFocus.toppings.add(this)
+				}
+			}
+		}
 	}
 
 	/**
