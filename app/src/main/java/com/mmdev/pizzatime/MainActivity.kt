@@ -1,6 +1,7 @@
 package com.mmdev.pizzatime
 
 import android.os.Bundle
+import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.motion.widget.MotionLayout
@@ -73,6 +74,8 @@ class MainActivity: AppCompatActivity() {
 
 	private var pizzasInCart = 0
 
+	private var initialPosIvHotIndicator = 0f
+
 
 
 
@@ -113,6 +116,9 @@ class MainActivity: AppCompatActivity() {
 		//init first prices and names
 		pizzaName.setText(currentPizzaInFocus.name)
 
+		if (pizzasInCart > 0){
+			tvCardBadgeCount.visibility = View.VISIBLE
+		}
 		tvCardBadgeCount.text = "$pizzasInCart"
 
 		//clear toppings selection
@@ -120,12 +126,15 @@ class MainActivity: AppCompatActivity() {
 		btnAddTomato.isSelected = false
 		btnAddBacon.isSelected = false
 		btnAddCheese.isSelected = false
-		btnAddChili.isSelected = false
+		if (btnAddChili.isSelected){
+			btnAddChili.isSelected = false
+			ivHotIndicator.animate().translationX(initialPosIvHotIndicator).duration = 500
+		}
 		btnAddToCart.isClickable = false
 	}
 
 	private fun setupViews() {
-		val initialTranslationX = ivHotIndicator.translationX
+		initialPosIvHotIndicator = ivHotIndicator.translationX
 		//back to pizzas carousel
 		toolbarBackBtn.setOnClickListener {
 			motionLayout.setTransition(R.id.backToPizzaCarousel)
@@ -235,7 +244,7 @@ class MainActivity: AppCompatActivity() {
 					it.isSelected = false
 					currentPizzaInFocus.toppings.remove(this)
 					decreaseCurrentPizzaPrice(this.price)
-					ivHotIndicator.animate().translationX(initialTranslationX).setDuration(500)
+					ivHotIndicator.animate().translationX(initialPosIvHotIndicator).setDuration(500)
 				}
 				else {
 					it.isSelected = true
@@ -456,7 +465,8 @@ class MainActivity: AppCompatActivity() {
 		pizzaPrice.setCurrentText("$${currentPizzaInFocus.resultPrice}")
 	}
 
-	override fun onBackPressed() {
-		toolbarBackBtn.performClick()
-	}
+	//cation
+//	override fun onBackPressed() {
+//		toolbarBackBtn.callOnClick()
+//	}
 }

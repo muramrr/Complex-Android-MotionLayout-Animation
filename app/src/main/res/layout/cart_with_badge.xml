@@ -30,6 +30,7 @@
 		android:textColor="@android:color/white"
 		android:text="0"
 		android:textSize="10sp"
+		android:visibility="invisible"
 		/>
 
 </FrameLayout>

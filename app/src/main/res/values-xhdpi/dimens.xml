@@ -5,10 +5,9 @@
 	<dimen name="pizzaPlateSize">205dp</dimen>
 	<dimen name="pizzaPriceTextSize">24sp</dimen>
 
-
 	<dimen name="btn_add_to_cart_size">48dp</dimen>
-
 	<dimen name="btn_pizza_size">44dp</dimen>
+
 	<dimen name="tv_order_manually_text_size">24sp</dimen>
 	<dimen name="pizzaRadiusInView">220dp</dimen>
 	<dimen name="pizzaRadiusOutView">350dp</dimen>
