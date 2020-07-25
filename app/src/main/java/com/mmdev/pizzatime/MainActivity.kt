@@ -125,8 +125,6 @@ class MainActivity: AppCompatActivity() {
 		toolbarBackBtn.setOnClickListener {
 			motionLayout.setTransition(R.id.backToPizzaCarousel)
 			motionLayout.transitionToEnd()
-			it.isClickable = false
-			pizzaViewsBounds.isClickable = true
 		}
 
 		//open pizza customizer
@@ -134,9 +132,6 @@ class MainActivity: AppCompatActivity() {
 			pizzaImg_1.setImageResource(currentPizzaInFocus.image)
 			motionLayout.setTransition(R.id.openCustomizer)
 			motionLayout.transitionToEnd()
-			//prevent to click again on this
-			it.isClickable = false
-			toolbarBackBtn.isClickable = true
 		}
 
 		// pizza name appearance anim
@@ -265,6 +260,10 @@ class MainActivity: AppCompatActivity() {
 				}
 			}
 
+			//prevent to jumping between animations
+			pizzaViewsBounds.isClickable = false
+			toolbarBackBtn.isClickable = false
+
 		}
 
 		override fun onTransitionChange(motionLayout: MotionLayout, start: Int, end: Int, position: Float) {}
@@ -302,11 +301,15 @@ class MainActivity: AppCompatActivity() {
 			}
 
 			if (currentId !in arrayOf(R.id.pizzaCustomizeState,
-			                          R.id.preCustomizerState,
-			                          R.id.firstPos)) {
-				pizzaName.setText(currentPizzaInFocus.name)
-				applySizeToCurrentPizzaAndDisplay(sizeSelected)
+			                          R.id.preCustomizerState)) {
+				pizzaViewsBounds.isClickable = true
+				if (currentId != R.id.firstPos) {
+					pizzaName.setText(currentPizzaInFocus.name)
+					applySizeToCurrentPizzaAndDisplay(sizeSelected)
+				}
 			}
+
+			toolbarBackBtn.isClickable = (currentId == R.id.pizzaCustomizeState)
 		}
 	}
 

@@ -93,7 +93,7 @@
 		android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
 
 		app:cornerRadius="24dp"
-		app:backgroundTint="#FFC400"
+		app:backgroundTint="#F1CB5A"
 
 		app:layout_constraintStart_toStartOf="@id/guidelineStart"
 		app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -336,7 +336,7 @@
 
 		android:src="@drawable/ic_add_to_shopping_cart_24_white"
 
-		android:background="@drawable/btn_add_to_cart_background"
+		android:background="@drawable/btn_add_to_cart_gradient_bg"
 
 		app:layout_constraintVertical_bias="0.95"
 		app:layout_constraintTop_toTopOf="parent"
