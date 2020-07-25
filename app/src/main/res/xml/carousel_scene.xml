@@ -462,17 +462,32 @@
 
 	<ConstraintSet android:id="@+id/pizzaCustomizeState">
 
-		<Constraint android:id="@+id/tableBackground"
+		<Constraint android:id="@+id/roundTableBg"
 			android:layout_width="0dp"
 			android:layout_height="0dp"
 
 			android:scaleX="1.2"
-			android:scaleY="1.2"
+			android:alpha="0"
+
+			app:layout_constraintTop_toTopOf="@id/squareTableBg"
+			app:layout_constraintBottom_toBottomOf="@id/squareTableBg"
+			app:layout_constraintStart_toStartOf="@id/squareTableBg"
+			app:layout_constraintEnd_toEndOf="@id/squareTableBg"
+			/>
+
+		<Constraint android:id="@+id/squareTableBg"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:layout_marginBottom="24dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp"
+
+			android:alpha="1"
 
 			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintBottom_toBottomOf="@id/btnAddToCart"
+			app:layout_constraintStart_toStartOf="@id/guidelineStart"
+			app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 			/>
 
 		<!-- toolbar title-->

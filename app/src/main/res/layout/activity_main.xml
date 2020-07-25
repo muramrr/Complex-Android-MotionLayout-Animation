@@ -13,17 +13,46 @@
 
 	<!-- app:layoutDescription="@xml/carousel_scene" -->
 
-	<View android:id="@+id/tableBackground"
+	<View android:id="@+id/mainBg"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+
+		android:background="@drawable/main_bg"
+
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		/>
+
+	<View android:id="@+id/roundTableBg"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
 		android:layout_marginBottom="24dp"
 
-		android:background="@drawable/table_background"
+		android:background="@drawable/table_bg_round"
 
 		app:layout_constraintTop_toTopOf="@id/pizzaViewsBounds"
 		app:layout_constraintBottom_toBottomOf="@id/btnAddToCart"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		/>
+
+	<View android:id="@+id/squareTableBg"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="16dp"
+		android:layout_marginStart="16dp"
+		android:layout_marginEnd="16dp"
+
+		android:alpha="0"
+
+		android:background="@drawable/table_bg_square"
+
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="@id/btnAddToCart"
+		app:layout_constraintStart_toStartOf="@id/guidelineStart"
+		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 		/>
 
 	<View android:id="@+id/toolbar"
