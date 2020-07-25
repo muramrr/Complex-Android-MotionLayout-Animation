@@ -9,6 +9,7 @@ import com.mmdev.pizzatime.MainActivity.Direction.FORWARD
 import com.mmdev.pizzatime.MainActivity.PizzaSize.*
 import com.mmdev.pizzatime.MainActivity.PizzaToppings.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.cart_with_badge.*
 import kotlinx.android.synthetic.main.pizza_views.*
 
 
@@ -70,6 +71,7 @@ class MainActivity: AppCompatActivity() {
 	private var currentIter = 0
 	private var dragDirection: Direction = FORWARD
 
+	private var pizzasInCart = 0
 
 
 
@@ -111,12 +113,15 @@ class MainActivity: AppCompatActivity() {
 		//init first prices and names
 		pizzaName.setText(currentPizzaInFocus.name)
 
+		tvCardBadgeCount.text = "$pizzasInCart"
+
 		//clear toppings selection
 		btnAddMushrooms.isSelected = false
 		btnAddTomato.isSelected = false
 		btnAddBacon.isSelected = false
 		btnAddCheese.isSelected = false
 		btnAddChili.isSelected = false
+		btnAddToCart.isClickable = false
 	}
 
 	private fun setupViews() {
@@ -240,6 +245,12 @@ class MainActivity: AppCompatActivity() {
 				}
 			}
 		}
+
+		btnAddToCart.setOnClickListener {
+			pizzasInCart++
+			motionLayout.setTransition(R.id.packPizzaTransition)
+			motionLayout.transitionToEnd()
+		}
 	}
 
 	private val motionListener = object : MotionLayout.TransitionListener {
@@ -310,6 +321,17 @@ class MainActivity: AppCompatActivity() {
 			}
 
 			toolbarBackBtn.isClickable = (currentId == R.id.pizzaCustomizeState)
+			btnAddToCart.isClickable = (currentId == R.id.pizzaCustomizeState)
+
+			if (currentId == R.id.packedPizzaState) {
+				motionLayout.setTransition(R.id.addPizzaToCartTransition)
+				motionLayout.transitionToEnd()
+			}
+
+			if (currentId == R.id.packedPizzaGoesInCartState) {
+				motionLayout.setTransition(R.id.backToPizzaCarouselAfterPacked)
+				motionLayout.transitionToEnd()
+			}
 		}
 	}
 

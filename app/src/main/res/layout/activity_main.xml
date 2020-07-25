@@ -5,7 +5,6 @@
 	android:layout_width="match_parent"
 
 	app:layoutDescription="@xml/carousel_scene"
-	app:motionDebug="SHOW_ALL"
 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -271,17 +270,35 @@
 
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/ingredientsContainer"
-		android:layout_width="wrap_content"
+	<com.google.android.material.textview.MaterialTextView
+		android:id="@+id/tvToppings"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="8dp"
+		android:text="Toppings"
+		android:textAlignment="center"
+		android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+		android:textColor="#BFB7B5"
 
 		android:alpha="0"
-		android:translationY="300dp"
 
 		app:layout_constraintTop_toBottomOf="@id/pizzaSizeContainer"
 		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
 		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		app:layout_constraintBottom_toTopOf="@id/ingredientsContainer"
+		/>
+
+	<LinearLayout android:id="@+id/ingredientsContainer"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+
+		android:alpha="0"
+		android:translationY="300dp"
+
+		app:layout_constraintTop_toBottomOf="@id/tvToppings"
+		app:layout_constraintStart_toStartOf="@id/pizzaViewsBounds"
+		app:layout_constraintEnd_toEndOf="@id/pizzaViewsBounds"
+		app:layout_constraintBottom_toTopOf="@id/btnAddToCart"
 		>
 
 		<com.google.android.material.button.MaterialButton
@@ -376,8 +393,7 @@
 		android:contentDescription="@null"
 		/>
 
-	<ImageView
-		android:id="@+id/ivHotIndicator"
+	<ImageView android:id="@+id/ivHotIndicator"
 		android:layout_width="48dp"
 		android:layout_height="48dp"
 		android:layout_margin="16dp"
@@ -393,6 +409,23 @@
 		app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
 		android:contentDescription="@null"
 		/>
+
+	<ImageView android:id="@+id/pizzaBox"
+		android:layout_width="@dimen/pizzaPlateSize"
+		android:layout_height="@dimen/pizzaPlateSize"
+
+		android:scaleY="0"
+		android:scaleX="0"
+
+		android:src="@drawable/pizza_box"
+
+		app:layout_constraintTop_toBottomOf="@id/tvPizzaChip"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+
+		android:contentDescription="@null"
+		/>
+
 
 
 
