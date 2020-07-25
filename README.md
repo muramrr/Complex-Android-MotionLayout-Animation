@@ -4,11 +4,15 @@
 
 ## MotionLayout Complex Animation
 
-Originally based on this Dribbble [-link-](https://dribbble.com/shots/8154883-Pizza-order-system)
+Originally based on this [Dribbble shot](https://dribbble.com/shots/8154883-Pizza-order-system).
+
+<a href="https://dribbble.com/shots/8154883-Pizza-order-system">
+  <img alt="Design on Dribbble" src="https://github.com/muramrr/misc/blob/master/dribbble.png" width="196" height="80" hspace="15" />
+</a>
 
 Android solution using only **MotionLayout** and **Material Components** library. 
 
-No custom views.
+No custom components or views.
 
 ### Explanations
 
