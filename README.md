@@ -1,6 +1,6 @@
 # Complex-Android-MotionLayout-Animation
 
-<img src="/media/untitled (1).gif" alt="sample" title="sample" width="320" height="600" align="right" vspace="52" />
+<img src="/media/untitled (1).gif" alt="sample" title="sample" align="right" vspace="52" />
 
 ## MotionLayout Complex Animation
 
